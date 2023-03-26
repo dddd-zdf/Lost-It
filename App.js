@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Text, View, Pressable } from 'react-native';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
@@ -11,9 +10,8 @@ import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import AddEdit from './components/AddEdit';
 import Detail from './components/Detail';
-import Home from './components/Home';
+import ItemList from './components/ItemList';
 import Profile from './components/Profile';
-import ProfileItem from './components/ProfileItem';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +20,8 @@ function BottomTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" 
-        component={Home}
+        component={ItemList}
+        initialParams={{ filter: 'all' }}
         options={{
           tabBarIcon: ({ color, size }) => (<Entypo name="home" size={size} color={color} />),
       }}/>
@@ -47,15 +46,24 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="BottomTab"
           component={BottomTabs}
+          options={({ route }) => ({
+            //unable to get the name when launching app. presumably a timing issue
+            headerTitle: getFocusedRouteNameFromRoute(route) || 'Home'
+          })}
+        />
+        <Stack.Screen
+          name="Item Details"
+          component={Detail}
           options={({ route }) => ({
             headerTitle: getFocusedRouteNameFromRoute(route),
           })}        
         />
         <Stack.Screen
-          name="Item Details"
-          component={Detail}
+          name="Item List"
+          component={ItemList}
+          initialParams={{ filter: 'user' }}
           options={({ route }) => ({
             headerTitle: getFocusedRouteNameFromRoute(route),
           })}        

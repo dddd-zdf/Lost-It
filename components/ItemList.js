@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import * as React from 'react';
+import { Text, View, Pressable } from 'react-native';
 
-export default function Profile({navigation}) {
+export default function ItemList({navigation}) {
   return (
     <View>
-      <Text>Profile Screen</Text>
+      <Text>ItemList Screen</Text>
       <Pressable
-        onPress={() => navigation.navigate('Item List')}
+        onPress={() => navigation.navigate('Item Details')}
         style={({ pressed }) => [
           {
             backgroundColor: pressed ? 'gray' : 'white'
@@ -18,8 +18,8 @@ export default function Profile({navigation}) {
           }
         ]}
       >
-        <Text>Go to item list under this user profile</Text>
+      <Text>Go to Item Details</Text>
       </Pressable>
     </View>
   );
-};
+}
