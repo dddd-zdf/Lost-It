@@ -12,6 +12,7 @@ import AddEdit from './components/AddEdit';
 import Detail from './components/Detail';
 import ItemList from './components/ItemList';
 import Profile from './components/Profile';
+import Mylist from './components/Mylist';
 
 
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,12 @@ function BottomTabs() {
         initialParams={{ filter: 'all' }}
         options={{
           tabBarIcon: ({ color, size }) => (<Entypo name="home" size={size} color={color} />),
+      }}/>
+       <Tab.Screen name="Mylist" 
+        component={Mylist}
+        initialParams={{ filter: 'all' }}
+        options={{
+          tabBarIcon: ({ color, size }) => (<Entypo name="list" size={24} color="black" />),
       }}/>
       <Tab.Screen name="Post" 
         component={AddEdit} 
