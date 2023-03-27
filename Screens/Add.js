@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function AddEdit() {
+export default function Add() {
   return (
     <View>
-      <Text>Add/Edit Screen</Text>
+      <Text>Add Screen</Text>
     </View>
   );
 };

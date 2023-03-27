@@ -8,11 +8,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import AddEdit from './components/AddEdit';
-import Detail from './components/Detail';
-import ItemList from './components/ItemList';
-import Profile from './components/Profile';
-import Mylist from './components/Mylist';
+import AddEdit from './Screens/Add';
+import Detail from './Screens/Detail';
+import ItemList from './Screens/ItemList';
+import Profile from './Screens/Profile';
+import Mylist from './Screens/Mylist';
 
 
 const Tab = createBottomTabNavigator();
