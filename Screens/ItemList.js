@@ -6,7 +6,7 @@ export default function ItemList({route},{navigation}) {
   const filter = route.params.filter;
   return (
     <View>
-      <Text>
+      {/* <Text>
         {
           filter == 'user' ? ('item list under a user profile') : ('item list for all items')
         }
@@ -25,7 +25,8 @@ export default function ItemList({route},{navigation}) {
         ]}
       >
       <Text>Go to Item Details</Text>
-      </Pressable>
+      </Pressable> */}
+      <Text>Home</Text>
     </View>
   );
 }
