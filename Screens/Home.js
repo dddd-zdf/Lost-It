@@ -14,6 +14,7 @@ export default function Home({ navigation }) {
 
     const [entries, setEntries] = useState([]);
     function onEntryPress(entry) {
+        console.log("first")
         navigation.navigate("Item Details", entry);
     }
 
@@ -40,9 +41,9 @@ export default function Home({ navigation }) {
         };
     }, []);
 
-    function onEntryPress() {
-        console.log("Clicked Entry");
-    }
+    // function onEntryPress() {
+    //     console.log("Clicked Entry");
+    // }
     return (
         <View style={ScreenContainer}>
             <EntriesList myEntries={entries} onEntryPress={onEntryPress} />
