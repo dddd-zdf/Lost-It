@@ -13,6 +13,7 @@ import Detail from "./Screens/Detail";
 import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
 import Mylist from "./Screens/Mylist";
+import Edit from "./Screens/Edit";
 
 const Tab = createBottomTabNavigator();
 
@@ -87,14 +88,14 @@ export default function App() {
                         headerTitle: getFocusedRouteNameFromRoute(route),
                     })}
                 />
-                {/* <Stack.Screen
-                    name="Item List"
-                    component={ItemList}
+                <Stack.Screen
+                    name="Edit Item"
+                    component={Edit}
                     initialParams={{ filter: "user" }}
                     options={({ route }) => ({
                         headerTitle: getFocusedRouteNameFromRoute(route),
                     })}
-                /> */}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

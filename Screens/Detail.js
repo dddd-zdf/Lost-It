@@ -3,6 +3,7 @@ import React from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { Entypo, Feather } from "@expo/vector-icons";
+
 import {
     updateOverLimitInDB,
     deleteFromDB,
@@ -11,25 +12,9 @@ import {
 export default function Detail({ route, navigation }) {
     const { key, title, description } = route.params;
 
-    function onConfrimPress() {
-        Alert.alert(
-            "Important",
-            "Are you sure you want to mark this entry as reviewed?",
-            [
-                {
-                    text: "Yes",
-                    onPress: () => {
-                        updateOverLimitInDB(key);
-                        return navigation.goBack();
-                    },
-                    style: "cancel",
-                },
-                {
-                    text: "No",
-                    style: "cancel",
-                },
-            ]
-        );
+    function onEditPress() {
+
+       navigation.navigate("Edit Item")
     }
 
     function onDeletePress() {
@@ -63,15 +48,15 @@ export default function Detail({ route, navigation }) {
                         pressedStyle={{ opacity: 0.8 }}
                         pressedFunction={onDeletePress}
                     >
-                        <Entypo name="trash" size={18} color="white" />
+                        <Text style={styles.buttonText}>Delete</Text>
                     </MyPressable>
 
                     <MyPressable
                         customStyle={styles.pressable}
                         pressedStyle={{ opacity: 0.8 }}
-                        pressedFunction={onConfrimPress}
+                        pressedFunction={onEditPress}
                     >
-                        <Feather name="check" size={18} color="white" />
+                       <Text style={styles.buttonText}>Edit</Text>
                     </MyPressable>
                 </View>
             </View>
@@ -109,7 +94,7 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 3,
         backgroundColor: COLORS.BLUE,
-        width: 50,
+        width: 80,
     },
     text: {
         fontSize: 15,
@@ -117,4 +102,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: COLORS.BLUE,
     },
+    buttonText:{
+        color: COLORS.WHITE,
+    }
 });

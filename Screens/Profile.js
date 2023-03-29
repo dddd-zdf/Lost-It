@@ -4,7 +4,7 @@ import { View, Text, Pressable } from 'react-native';
 export default function Profile({navigation}) {
   return (
     <View>
-      <Text>Profile Screen</Text>
+      {/* <Text>Profile Screen</Text>
       <Pressable
         onPress={() => navigation.navigate('Item List')}
         style={({ pressed }) => [
@@ -19,7 +19,8 @@ export default function Profile({navigation}) {
         ]}
       >
         <Text>Go to item list under this user profile</Text>
-      </Pressable>
+      </Pressable> */}
+      <Text>Profile Screen</Text>
     </View>
   );
 };
