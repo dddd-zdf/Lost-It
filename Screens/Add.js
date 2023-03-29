@@ -3,14 +3,37 @@ import { View, Text, StyleSheet } from "react-native";
 import MyInput from "../components/MyInput";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
+import { writeToDB } from "../Firebase/firestore-helper";
 
-export default function Add() {
+export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+
+    function checkNotEmpty(title, description) {
+        if (!title.trim() || !description.trim()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     function resetInputs() {
         setTitle("");
         setDescription("");
+    }
+
+    function onSubmit(title, description) {
+        if (checkNotEmpty(title, description)) {
+            let newEntry = {
+                title: title,
+                description: description,
+            };
+            // add to db
+            writeToDB(newEntry);
+            resetInputs();
+            return navigation.goBack();
+        }
+        Alert.alert("Invalid Input", "Please check your input values");
     }
 
     return (
@@ -37,7 +60,7 @@ export default function Add() {
                     <Text style={styles.text}>Reset</Text>
                 </MyPressable>
                 <MyPressable
-                    pressedFunction={() => onSubmit(calories, description)}
+                    pressedFunction={() => onSubmit(title, description)}
                     customStyle={styles.pressable}
                     pressedStyle={{ opacity: 0.5 }}
                 >
