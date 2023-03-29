@@ -2,19 +2,14 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import React from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
-import { Entypo, Feather } from "@expo/vector-icons";
 
-import {
-    updateOverLimitInDB,
-    deleteFromDB,
-} from "../Firebase/firestore-helper";
+import { deleteFromDB } from "../Firebase/firestore-helper";
 
 export default function Detail({ route, navigation }) {
     const { key, title, description } = route.params;
 
     function onEditPress() {
-
-       navigation.navigate("Edit Item")
+        navigation.navigate("Edit Item", { title, description, key });
     }
 
     function onDeletePress() {
@@ -56,7 +51,7 @@ export default function Detail({ route, navigation }) {
                         pressedStyle={{ opacity: 0.8 }}
                         pressedFunction={onEditPress}
                     >
-                       <Text style={styles.buttonText}>Edit</Text>
+                        <Text style={styles.buttonText}>Edit</Text>
                     </MyPressable>
                 </View>
             </View>
@@ -102,7 +97,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: COLORS.BLUE,
     },
-    buttonText:{
+    buttonText: {
         color: COLORS.WHITE,
-    }
+    },
 });

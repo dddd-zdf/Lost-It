@@ -6,12 +6,6 @@ import { firestore } from "../Firebase/firebase-setup";
 import { onSnapshot, collection } from "firebase/firestore";
 
 export default function Home({ navigation }) {
-    // const filter = route.params.filter;
-    // entries = [
-    //     { title: "AirPods", description: "Brand New" },
-    //     { title: "KeyChain", description: "Kamado Tanjiro DS" },
-    // ];
-
     const [entries, setEntries] = useState([]);
     function onEntryPress(entry) {
         navigation.navigate("Item Details", entry);
@@ -40,9 +34,6 @@ export default function Home({ navigation }) {
         };
     }, []);
 
-    // function onEntryPress() {
-    //     console.log("Clicked Entry");
-    // }
     return (
         <View style={ScreenContainer}>
             <EntriesList myEntries={entries} onEntryPress={onEntryPress} />
