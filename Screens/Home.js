@@ -14,7 +14,6 @@ export default function Home({ navigation }) {
 
     const [entries, setEntries] = useState([]);
     function onEntryPress(entry) {
-        console.log("first")
         navigation.navigate("Item Details", entry);
     }
 
