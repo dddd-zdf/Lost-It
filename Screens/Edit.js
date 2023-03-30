@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyInput from "../components/MyInput";
 import MyPressable from "../components/MyPressable";
+import { UpdateDB } from "../Firebase/firestore-helper";
 
 export default function Edit({ route, navigation }) {
   const { title, description, key } = route.params;
@@ -14,16 +15,25 @@ export default function Edit({ route, navigation }) {
     return navigation.goBack();
   }
 
+  function onSubmit(updatedTitle, updatedDescription) {
+    UpdateDB(key, updatedTitle, updatedDescription);
+    let entry = {
+        title: updatedTitle,
+        description: updatedDescription
+    }
+    return navigation.navigate("Item Details", entry)
+  }
+
   return (
     <View style={[ScreenContainer, { paddingTop: 50 }]}>
       <MyInput
         inputName={"Title"}
-        value={title}
+        value={updatedTitle}
         textUpdateFunction={setUpdatedTitle}
       />
       <MyInput
         inputName={"Description"}
-        value={description}
+        value={updatedDescription}
         textUpdateFunction={setUpdatedDescription}
         customStyle={{ height: 100 }}
       />
@@ -37,7 +47,7 @@ export default function Edit({ route, navigation }) {
           <Text style={styles.text}>Cancel</Text>
         </MyPressable>
         <MyPressable
-          pressedFunction={() => onSubmit(title, description)}
+          pressedFunction={() => onSubmit(updatedTitle, updatedDescription)}
           customStyle={styles.pressable}
           pressedStyle={{ opacity: 0.5 }}
         >
