@@ -11,11 +11,11 @@ export default function EntryItem({ entry, onPress }) {
       pressedStyle={{ opacity: 0.8 }}
     >
       <View style={styles.labelContainer}>
-        <Text style={styles.text}>Title:</Text>
+        <Text style={styles.text}>Title: </Text>
         <Text style={styles.text}>{entry.title}</Text>
       </View>
       <View style={styles.labelContainer}>
-        <Text style={styles.text}>Description:</Text>
+        <Text style={styles.text}>Description: </Text>
         <Text style={styles.text}>{entry.description}</Text>
       </View>
     </MyPressable>
@@ -25,7 +25,7 @@ export default function EntryItem({ entry, onPress }) {
 const styles = StyleSheet.create({
   entryContainer: {
     flexDirection: "column",
-    backgroundColor: COLORS.BLUE,
+    backgroundColor: COLORS.LIGHTBLUE,
     // justifyContent: "space-between",
     alignItems: "left",
     borderColor: "black",
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
   },
   text: {
-    color: COLORS.WHITE,
+    color: COLORS.BLUE,
     fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",

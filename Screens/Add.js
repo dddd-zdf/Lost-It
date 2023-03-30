@@ -38,7 +38,7 @@ export default function Add({ navigation }) {
 
     return (
         <View style={[ScreenContainer, { paddingTop: 50 }]}>
-            <Text>Add Screen</Text>
+           
             <MyInput
                 inputName={"Title"}
                 value={title}
