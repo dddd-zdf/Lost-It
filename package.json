@@ -9,13 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/ngrok": "^2.4.3",
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
+    "@react-navigation/stack": "^6.3.16",
     "expo": "~48.0.9",
     "expo-status-bar": "~1.4.4",
+    "firebase": "^9.18.0",
     "react": "18.2.0",
-    "react-native": "0.71.4"
+    "react-native": "0.71.4",
+    "react-native-dotenv": "^3.4.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@expo/ngrok": "^4.1.0"
   },
   "private": true
 }
