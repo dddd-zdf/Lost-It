@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: COLORS.LIGHTBLUE,
     // justifyContent: "space-between",
-    alignItems: "left",
+    alignItems: "flex-start",
     borderColor: "black",
     marginTop: 15,
     width: 340,
