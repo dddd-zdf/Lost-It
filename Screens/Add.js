@@ -4,10 +4,14 @@ import MyInput from "../components/MyInput";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../Firebase/firebase-setup";
+
 
 export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [user] = useAuthState(auth);
 
     function checkNotEmpty(title, description) {
         if (!title.trim() || !description.trim()) {
@@ -27,6 +31,7 @@ export default function Add({ navigation }) {
             let newEntry = {
                 title: title,
                 description: description,
+                userId: user.uid,
             };
             // add to db
             writeToDB(newEntry);
