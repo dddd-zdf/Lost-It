@@ -4,6 +4,7 @@ import MyInput from "../components/MyInput";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
+import ImageManager from "../components/ImageManager";
 
 export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
@@ -50,6 +51,8 @@ export default function Add({ navigation }) {
                 textUpdateFunction={setDescription}
                 customStyle={{ height: 100 }}
             />
+
+            <ImageManager/>
 
             <View style={styles.pressablesContainer}>
                 <MyPressable
