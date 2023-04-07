@@ -24,6 +24,7 @@ export default function Signup({ navigation }) {
       );
       // console.log(userCred);
     } catch (err) {
+      Alert.alert(err.code);
       console.log("Auth error ", err);
     }
   };
