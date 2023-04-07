@@ -4,16 +4,27 @@ import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 
 import { deleteFromDB } from "../Firebase/firestore-helper";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../Firebase/firebase-setup";
 
 export default function Detail({ route, navigation }) {
-    const { key, title, description } = route.params;
-
+    console.log(route.params);
+    const { key, title, description, userId } = route.params;
+    const [user] = useAuthState(auth);
+    
     function onEditPress() {
-        navigation.navigate("Edit Item", { title, description, key });
+        if (userId !== user.uid) {
+            Alert.alert("No Access");
+        } else {
+            navigation.navigate("Edit Item", { title, description, key });
+        }
     }
 
     function onDeletePress() {
-        Alert.alert("Delete", "Are you sure you want to delete this entry?", [
+        if (userId !== user.uid) {
+            Alert.alert("No Access");
+        } else {
+            Alert.alert("Delete", "Are you sure you want to delete this entry?", [
             {
                 text: "Yes",
                 onPress: () => {
@@ -27,6 +38,7 @@ export default function Detail({ route, navigation }) {
                 style: "cancel",
             },
         ]);
+        }
     }
 
     return (
