@@ -12,7 +12,6 @@ import AddEdit from "./Screens/Add";
 import Detail from "./Screens/Detail";
 import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
-import Mylist from "./Screens/Mylist";
 import Edit from "./Screens/Edit";
 import Login from "./Screens/Login";
 import Signup from "./Screens/Signup";
@@ -36,7 +35,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Mylist"
-                component={Mylist}
+                component={Home}
                 initialParams={{ filter: "user" }}
                 options={{
                     tabBarIcon: ({ color, size }) => (
