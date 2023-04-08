@@ -1,8 +1,21 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Button } from 'react-native';
+import { signOut } from "firebase/auth";
+import { auth } from "../Firebase/firebase-setup";
+
 
 export default function Profile({navigation}) {
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Signed out.");
+      })
+      .catch((error) => {
+        console.error("Error signing out: ", error);
+      });
+  };
   return (
+    
     <View>
       {/* <Text>Profile Screen</Text>
       <Pressable
@@ -21,6 +34,8 @@ export default function Profile({navigation}) {
         <Text>Go to item list under this user profile</Text>
       </Pressable> */}
       <Text>Profile Screen</Text>
+      <Button title="Sign Out" onPress={handleSignOut} />
+
     </View>
   );
 };
