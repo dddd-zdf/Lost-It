@@ -1,8 +1,9 @@
-import { View, Text, Button, Alert } from "react-native";
-import React from "react";
+import { View, Text, Button, Alert, Image } from "react-native";
+import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
 export default function ImageManager() {
+  const [imageUri, setImageUri] = useState("");
   const [permissionInfo, requestPermission] =
     ImagePicker.useCameraPermissions();
 
@@ -10,24 +11,27 @@ export default function ImageManager() {
     if (permissionInfo.granted) {
       return true;
     }
-    try{
-    const permissionResult = await requestPermission();
-    return permissionResult.granted;
-    }catch(err){
-        console.log("Permission request error", err);
+    try {
+      const permissionResult = await requestPermission();
+      return permissionResult.granted;
+    } catch (err) {
+      console.log("Permission request error", err);
     }
   }
   async function imageHandler() {
     const hasPermission = await verifyPermission();
     if (!hasPermission) {
-        Alert.alert("You need to give access to the camera");
-        return;
+      Alert.alert("You need to give access to the camera");
+      return;
     }
     try {
       const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
       });
-      console.log(result);
+      if (!result.canceled) {
+        console.log(result.assets[0].uri);
+        setImageUri(result.assets[0].uri);
+      }
     } catch (err) {
       console.log("launch camera failed");
     }
@@ -35,6 +39,7 @@ export default function ImageManager() {
   return (
     <View>
       <Button title="Take a picture" onPress={imageHandler} />
+      <Image source={{ uri: imageUri }} style={{width: 100, height: 100}} />
     </View>
   );
 }
