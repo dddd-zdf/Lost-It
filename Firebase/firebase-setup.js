@@ -16,7 +16,6 @@ import {
     appId,
 } from "@env";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: apiKey,
     authDomain: authDomain,
