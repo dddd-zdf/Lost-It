@@ -55,6 +55,7 @@ export default function Add({ navigation }) {
     const imageName = uri.substring(uri.lastIndexOf("/") + 1);
     const imageRef = await ref(storage, `images/${imageName}`);
     const uploadResult = await uploadBytesResumable(imageRef, imageBlob)
+    console.log(uploadResult);
     }
     catch (err) {
         console.log("image fetch error", err);
