@@ -5,6 +5,8 @@ import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
 import ImageManager from "../components/ImageManager";
+import { ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../Firebase/firebase-setup";
 
 export default function Add({ navigation }) {
   const [title, setTitle] = useState("");
@@ -31,6 +33,7 @@ export default function Add({ navigation }) {
         description: description,
 
       };
+      fetchImage(imageUri);
       // add to db
       writeToDB(newEntry);
       resetInputs();
@@ -40,21 +43,23 @@ export default function Add({ navigation }) {
   }
   const imageUriHandler = (uri) => {
     setImageUri(uri);
+    console.log("from add", uri)
     // fetchImage(uri);
   }
+ 
 
-//   async function fetchImage(uri) {{
-//     try{
-//     const response = await fetch(uri)
-//     const imageBlob = await response.blob();
-//     const imageName = uri.substring(uri.lastIndexOf("/") + 1);
-//     const imageRef = await ref(storage,    `images/%{imagename}`);
-//     const uploadReseult = await uploadBytesResumable(imageRef, imageBlob)
-//     }
-//     catch (err) {
-//         console.log("image fetch error", err);
-//     }
-//   }
+  async function fetchImage(uri) {
+    try{
+    const response = await fetch(uri)
+    const imageBlob = await response.blob();
+    const imageName = uri.substring(uri.lastIndexOf("/") + 1);
+    const imageRef = await ref(storage, `images/${imageName}`);
+    const uploadResult = await uploadBytesResumable(imageRef, imageBlob)
+    }
+    catch (err) {
+        console.log("image fetch error", err);
+    }
+  }
 
 
 
