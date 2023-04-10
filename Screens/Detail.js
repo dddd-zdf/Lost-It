@@ -1,32 +1,53 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Image } from "react-native";
 import React from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
-
+import LocationManager from "../components/LocationManager";
 import { deleteFromDB } from "../Firebase/firestore-helper";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../Firebase/firebase-setup";
+import { MAPS_API_KEY } from "@env";
 
 export default function Detail({ route, navigation }) {
-    const { key, title, description } = route.params;
+    const { key, title, description, userId, location } = route.params;
+    const [user] = useAuthState(auth);
 
     function onEditPress() {
-        navigation.navigate("Edit Item", { title, description, key });
+        if (userId !== user.uid) {
+            Alert.alert("No Access");
+        } else {
+            navigation.navigate("Edit Item", {
+                title,
+                description,
+                key,
+                location,
+            });
+        }
     }
 
     function onDeletePress() {
-        Alert.alert("Delete", "Are you sure you want to delete this entry?", [
-            {
-                text: "Yes",
-                onPress: () => {
-                    deleteFromDB(key);
-                    return navigation.goBack();
-                },
-                style: "cancel",
-            },
-            {
-                text: "No",
-                style: "cancel",
-            },
-        ]);
+        if (userId !== user.uid) {
+            Alert.alert("No Access");
+        } else {
+            Alert.alert(
+                "Delete",
+                "Are you sure you want to delete this entry?",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => {
+                            deleteFromDB(key);
+                            return navigation.goBack();
+                        },
+                        style: "cancel",
+                    },
+                    {
+                        text: "No",
+                        style: "cancel",
+                    },
+                ]
+            );
+        }
     }
 
     return (
@@ -36,6 +57,27 @@ export default function Detail({ route, navigation }) {
                 <Text
                     style={styles.text}
                 >{`Description:  ${description}`}</Text>
+
+                <View style={styles.utilitiesContainer}>
+                    <MyPressable
+                        pressedFunction={() =>
+                            console.log("pressed image snapping")
+                        }
+                        customStyle={styles.utilitiesButtons}
+                        pressedStyle={{ opacity: 0.8 }}
+                    >
+                        <Text style={styles.text}>Image</Text>
+                    </MyPressable>
+                    <Image
+                        source={{
+                            uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
+                        }}
+                        style={{
+                            width: styles.utilitiesButtons.width,
+                            height: styles.utilitiesButtons.height,
+                        }}
+                    />
+                </View>
 
                 <View style={styles.pressablesContainer}>
                     <MyPressable
@@ -65,7 +107,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderColor: "black",
-        width: 300,
+        width: 350,
         paddingVertical: 15,
         borderRadius: 5,
         shadowColor: COLORS.BLACK,
@@ -99,5 +141,27 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: COLORS.WHITE,
+    },
+    utilitiesContainer: {
+        flexDirection: "row",
+        marginTop: 25,
+        width: "90%",
+        height: 200,
+        borderColor: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        borderWidth: 0,
+    },
+    utilitiesButtons: {
+        // flex: 1,
+        width: 130,
+        height: 130,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 10,
+        paddingVertical: 7,
+        borderRadius: 3,
+        backgroundColor: COLORS.GOLD,
+        paddingHorizontal: 3,
     },
 });

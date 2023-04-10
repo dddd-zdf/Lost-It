@@ -24,15 +24,20 @@ export async function deleteFromDB(id) {
     }
 }
 
-export async function UpdateDB(id, updatedTitle, updatedDescription) {
-    console.log(id, updatedTitle, updatedDescription);
+export async function UpdateDB(
+    id,
+    updatedTitle,
+    updatedDescription,
+    updatedLocation
+) {
     try {
-      //   await updateDoc(doc(firestore, "entries", id.toString()));
-      await updateDoc(doc(firestore, "entries", id.toString()), {
-        title: updatedTitle,
-        description: updatedDescription
-      });
+        //   await updateDoc(doc(firestore, "entries", id.toString()));
+        await updateDoc(doc(firestore, "entries", id.toString()), {
+            title: updatedTitle,
+            description: updatedDescription,
+            location: updatedLocation,
+        });
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  }
+}

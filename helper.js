@@ -6,7 +6,7 @@ export const COLORS = {
     LIGHTBLUE: "#A9CCE3",
     BLACK: "black",
     MAROON: "#800000",
-    CYAN2: "#a1bbc4"
+    CYAN2: "#a1bbc4",
 };
 
 export const ScreenContainer = {
@@ -14,4 +14,9 @@ export const ScreenContainer = {
     backgroundColor: COLORS.CYAN2,
     justifyContent: "flex-start",
     alignItems: "center",
+};
+
+export const DefaultLocation = {
+    latitude: 49.280517,
+    longitude: -123.115961,
 };

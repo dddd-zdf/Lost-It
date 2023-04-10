@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import {
     NavigationContainer,
     getFocusedRouteNameFromRoute,
@@ -8,12 +8,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import AddEdit from "./Screens/Add";
+import Add from "./Screens/Add";
 import Detail from "./Screens/Detail";
 import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
-import Mylist from "./Screens/Mylist";
 import Edit from "./Screens/Edit";
+import Login from "./Screens/Login";
+import Signup from "./Screens/Signup";
+import Map from "./Screens/Map";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./Firebase/firebase-setup";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,8 +36,8 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Mylist"
-                component={Mylist}
-                initialParams={{ filter: "all" }}
+                component={Home}
+                initialParams={{ filter: "user" }}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Entypo name="list" size={24} color="black" />
@@ -42,7 +46,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Post"
-                component={AddEdit}
+                component={Add}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="plus" size={size} color={color} />
@@ -68,34 +72,66 @@ function BottomTabs() {
 
 const Stack = createNativeStackNavigator();
 
+const AuthStack = (
+    <>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+    </>
+);
+
+const AppStack = (
+    <>
+        <Stack.Screen
+            name="BottomTab"
+            component={BottomTabs}
+            options={({ route }) => ({
+                //unable to get the name when launching app. presumably a timing issue
+                headerTitle: getFocusedRouteNameFromRoute(route) || "Home",
+            })}
+        />
+        <Stack.Screen
+            name="Item Details"
+            component={Detail}
+            options={({ route }) => ({
+                headerTitle: getFocusedRouteNameFromRoute(route),
+            })}
+        />
+        <Stack.Screen
+            name="Edit Item"
+            component={Edit}
+            initialParams={{ filter: "user" }}
+            options={({ route }) => ({
+                headerTitle: getFocusedRouteNameFromRoute(route),
+            })}
+        />
+
+        <Stack.Screen
+            name="Map"
+            component={Map}
+            options={({ route }) => ({
+                headerTitle: getFocusedRouteNameFromRoute(route),
+            })}
+        />
+    </>
+);
+
 export default function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
+    }, []);
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen
-                    name="BottomTab"
-                    component={BottomTabs}
-                    options={({ route }) => ({
-                        //unable to get the name when launching app. presumably a timing issue
-                        headerTitle:
-                            getFocusedRouteNameFromRoute(route) || "Home",
-                    })}
-                />
-                <Stack.Screen
-                    name="Item Details"
-                    component={Detail}
-                    options={({ route }) => ({
-                        headerTitle: getFocusedRouteNameFromRoute(route),
-                    })}
-                />
-                <Stack.Screen
-                    name="Edit Item"
-                    component={Edit}
-                    initialParams={{ filter: "user" }}
-                    options={({ route }) => ({
-                        headerTitle: getFocusedRouteNameFromRoute(route),
-                    })}
-                />
+                {isAuthenticated ? AppStack : AuthStack}
             </Stack.Navigator>
         </NavigationContainer>
     );

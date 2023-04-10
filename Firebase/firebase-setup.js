@@ -1,33 +1,35 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import {getStorage} from "firebase/storage";
+import React from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import {apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, MAPS_API_KEY} from "@env"
-
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//     apiKey : "AIzaSyDqfNNH9jlK6e6QPg0i_83clVRtrBO4iC4",
-// authDomain : "lostit-dd4db.firebaseapp.com",
-// projectId :"lostit-dd4db",
-// storageBucket : "lostit-dd4db.appspot.com",
-// messagingSenderId : "25896468303",
-// appId : "1:25896468303:web:cd2a95bf227e90c32c0f3a",
-// MAPS_API_KEY : "AIzaSyCdhumcQQOIKwepzNnceWVvi9c0c829Xlo",
-// };
+import { getFirestore } from "firebase/firestore";
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+    apiKey,
+    authDomain,
+    projectId,
+    storageBucket,
+    messagingSenderId,
+    appId,
+} from "@env";
 
 const firebaseConfig = {
-        apiKey : apiKey,
-    authDomain : authDomain,
-    projectId :projectId,
-    storageBucket : storageBucket,
-    messagingSenderId : messagingSenderId,
-    appId : appId,
-    MAPS_API_KEY : MAPS_API_KEY,
-    };
+    apiKey: apiKey,
+    authDomain: authDomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
+};
 
-// Initialize Firebase
 const myApp = initializeApp(firebaseConfig);
 export const firestore = getFirestore(myApp);
+// export const auth = getAuth(myApp);
+export const auth = initializeAuth(myApp, {
+    persistence: getReactNativePersistence(AsyncStorage),
+});
+
 export const storage = getStorage(myApp);
