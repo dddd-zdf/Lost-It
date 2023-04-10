@@ -1,10 +1,18 @@
 import { View, Text, StyleSheet, Button } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
+import MyPressable from "../components/MyPressable";
+import { DefaultLocation } from "../helper";
 
 export default function Map({ navigation, route }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
-    console.log("route.params ", route.params);
+
+    useEffect(() => {
+        if (route.params.currentLocation) {
+            setSelectedLocation(route.params.currentLocation);
+        }
+    }, [route]);
+
     return (
         <>
             <MapView
@@ -15,13 +23,14 @@ export default function Map({ navigation, route }) {
                     });
                 }}
                 style={styles.container}
+                provider="google"
                 initialRegion={{
-                    latitude: route.params
+                    latitude: route.params.currentLocation
                         ? route.params.currentLocation.latitude
-                        : 49.280517,
-                    longitude: route.params
+                        : DefaultLocation.latitude,
+                    longitude: route.params.currentLocation
                         ? route.params.currentLocation.longitude
-                        : -123.115961,
+                        : DefaultLocation.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
@@ -36,15 +45,19 @@ export default function Map({ navigation, route }) {
                 )}
             </MapView>
 
-            <Button
-                disabled={!selectedLocation}
+            <MyPressable
+                isDisabled={!selectedLocation}
                 title="Confirm selected location"
-                onPress={() =>
-                    navigation.navigate("Post", {
+                customStyle={styles.confirmButton}
+                pressedStyle={{ opacity: 0.5 }}
+                pressedFunction={() =>
+                    navigation.navigate(route.params.returnScreen, {
                         selectedLocation: selectedLocation,
                     })
                 }
-            />
+            >
+                <Text> Confirm selectedLocation </Text>
+            </MyPressable>
         </>
     );
 }
@@ -55,5 +68,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         justifyContent: "center",
+    },
+    confirmButton: {
+        // position: "absolute",
+        zIndex: 1,
+        alignItems: "center",
+        marginBottom: 40,
+        marginTop: 10,
     },
 });

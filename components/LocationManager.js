@@ -10,6 +10,7 @@ export default function LocationManager({
     customPressableStyle,
     location,
     setLocation,
+    returnScreen,
 }) {
     const [permissionResponse, requestPermission] =
         Location.useForegroundPermissions();
@@ -34,16 +35,25 @@ export default function LocationManager({
 
     async function pickLocationHandler() {
         const permissionReceived = await verifyPermission();
-        if (!permissionReceived) {
-            navigation.navigate("Map");
+        if (location) {
+            navigation.navigate("Map", {
+                currentLocation: location,
+                returnScreen: returnScreen,
+            });
+        } else if (!permissionReceived) {
+            navigation.navigate("Map", { returnScreen: returnScreen });
         } else {
             try {
-                const result = await Location.getCurrentPositionAsync();
-                setLocation({
+                const result = await Location.getLastKnownPositionAsync();
+                let myLocation = {
                     latitude: result.coords.latitude,
                     longitude: result.coords.longitude,
+                };
+                setLocation(myLocation);
+                navigation.navigate("Map", {
+                    currentLocation: myLocation,
+                    returnScreen: returnScreen,
                 });
-                navigation.navigate("Map", { currentLocation: location });
             } catch (err) {
                 console.log("location handler ", err);
             }

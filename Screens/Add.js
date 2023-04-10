@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import MyInput from "../components/MyInput";
 import LocationManager from "../components/LocationManager";
-import { COLORS, ScreenContainer } from "../helper";
+import { COLORS, ScreenContainer, DefaultLocation } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -25,6 +25,7 @@ export default function Add({ navigation }) {
     function resetInputs() {
         setTitle("");
         setDescription("");
+        setLocation(null);
     }
 
     function onSubmit(title, description) {
@@ -33,6 +34,7 @@ export default function Add({ navigation }) {
                 title: title,
                 description: description,
                 userId: user.uid,
+                location: location ? location : DefaultLocation,
             };
             // add to db
             writeToDB(newEntry);
@@ -72,6 +74,7 @@ export default function Add({ navigation }) {
                     location={location}
                     setLocation={setLocation}
                     customPressableStyle={styles.utilitiesButtons}
+                    returnScreen={"Post"}
                 />
             </View>
 
