@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
+    NavigationContainer,
+    getFocusedRouteNameFromRoute,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import AddEdit from "./Screens/Add";
+import Add from "./Screens/Add";
 import Detail from "./Screens/Detail";
 import Home from "./Screens/Home";
 import Profile from "./Screens/Profile";
 import Edit from "./Screens/Edit";
 import Login from "./Screens/Login";
 import Signup from "./Screens/Signup";
+import Map from "./Screens/Map";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase/firebase-setup";
 
@@ -45,7 +46,7 @@ function BottomTabs() {
             />
             <Tab.Screen
                 name="Post"
-                component={AddEdit}
+                component={Add}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="plus" size={size} color={color} />
@@ -71,23 +72,21 @@ function BottomTabs() {
 
 const Stack = createNativeStackNavigator();
 
-
 const AuthStack = (
     <>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
     </>
-  );
-  
-  const AppStack = (
+);
+
+const AppStack = (
     <>
         <Stack.Screen
             name="BottomTab"
             component={BottomTabs}
             options={({ route }) => ({
                 //unable to get the name when launching app. presumably a timing issue
-                headerTitle:
-                    getFocusedRouteNameFromRoute(route) || "Home",
+                headerTitle: getFocusedRouteNameFromRoute(route) || "Home",
             })}
         />
         <Stack.Screen
@@ -105,27 +104,35 @@ const AuthStack = (
                 headerTitle: getFocusedRouteNameFromRoute(route),
             })}
         />
-    </>
-  );
 
-  export default function App() {
+        <Stack.Screen
+            name="Map"
+            component={Map}
+            options={({ route }) => ({
+                headerTitle: getFocusedRouteNameFromRoute(route),
+            })}
+        />
+    </>
+);
+
+export default function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+
     useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-      });
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
     }, []);
-  
+
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          {isAuthenticated ? AppStack : AuthStack}
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+            <Stack.Navigator>
+                {isAuthenticated ? AppStack : AuthStack}
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-  }
+}

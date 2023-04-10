@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import MyInput from "../components/MyInput";
-import { COLORS, ScreenContainer } from "../helper";
+import LocationManager from "../components/LocationManager";
+import { COLORS, ScreenContainer, DefaultLocation } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../Firebase/firebase-setup";
 
-
 export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [user] = useAuthState(auth);
+    const [location, setLocation] = useState(null);
 
     function checkNotEmpty(title, description) {
         if (!title.trim() || !description.trim()) {
@@ -24,6 +25,7 @@ export default function Add({ navigation }) {
     function resetInputs() {
         setTitle("");
         setDescription("");
+        setLocation(null);
     }
 
     function onSubmit(title, description) {
@@ -32,6 +34,7 @@ export default function Add({ navigation }) {
                 title: title,
                 description: description,
                 userId: user.uid,
+                location: location ? location : DefaultLocation,
             };
             // add to db
             writeToDB(newEntry);
@@ -43,7 +46,6 @@ export default function Add({ navigation }) {
 
     return (
         <View style={[ScreenContainer, { paddingTop: 50 }]}>
-           
             <MyInput
                 inputName={"Title"}
                 value={title}
@@ -55,6 +57,26 @@ export default function Add({ navigation }) {
                 textUpdateFunction={setDescription}
                 customStyle={{ height: 100 }}
             />
+
+            <View style={styles.utilitiesContainer}>
+                <MyPressable
+                    pressedFunction={() =>
+                        console.log("pressed image snapping")
+                    }
+                    customStyle={styles.utilitiesButtons}
+                    pressedStyle={{ opacity: 0.8 }}
+                >
+                    <Text style={styles.text}>
+                        Snap an image of probable lost location
+                    </Text>
+                </MyPressable>
+                <LocationManager
+                    location={location}
+                    setLocation={setLocation}
+                    customPressableStyle={styles.utilitiesButtons}
+                    returnScreen={"Post"}
+                />
+            </View>
 
             <View style={styles.pressablesContainer}>
                 <MyPressable
@@ -98,5 +120,27 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: COLORS.WHITE,
         fontWeight: "500",
+    },
+    utilitiesContainer: {
+        flexDirection: "row",
+        marginTop: 25,
+        width: "90%",
+        height: 200,
+        borderColor: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        borderWidth: 10,
+    },
+    utilitiesButtons: {
+        // flex: 1,
+        width: 130,
+        height: 130,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 25,
+        paddingVertical: 7,
+        borderRadius: 3,
+        backgroundColor: COLORS.BLUE,
+        paddingHorizontal: 3,
     },
 });

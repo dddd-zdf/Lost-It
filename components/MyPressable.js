@@ -6,6 +6,7 @@ export default function MyPressable({
     pressedFunction,
     customStyle,
     pressedStyle,
+    isDisabled
 }) {
     return (
         <Pressable
@@ -13,6 +14,7 @@ export default function MyPressable({
             style={({ pressed }) => {
                 return [customStyle, pressed && pressedStyle];
             }}
+            disabled = {!isDisabled ? false : true}
         >
             {children}
         </Pressable>
