@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import MyInput from "../components/MyInput";
+import LocationManager from "../components/LocationManager";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
@@ -11,6 +12,7 @@ export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [user] = useAuthState(auth);
+    const [location, setLocation] = useState(null);
 
     function checkNotEmpty(title, description) {
         if (!title.trim() || !description.trim()) {
@@ -66,15 +68,11 @@ export default function Add({ navigation }) {
                         Snap an image of probable lost location
                     </Text>
                 </MyPressable>
-                <MyPressable
-                    pressedFunction={() =>
-                        console.log("pressed location picker")
-                    }
-                    customStyle={styles.utilitiesButtons}
-                    pressedStyle={{ opacity: 0.5 }}
-                >
-                    <Text style={styles.text}>Pick location on map</Text>
-                </MyPressable>
+                <LocationManager
+                    location={location}
+                    setLocation={setLocation}
+                    customPressableStyle={styles.utilitiesButtons}
+                />
             </View>
 
             <View style={styles.pressablesContainer}>
