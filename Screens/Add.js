@@ -7,7 +7,6 @@ import { writeToDB } from "../Firebase/firestore-helper";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../Firebase/firebase-setup";
 
-
 export default function Add({ navigation }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -43,7 +42,6 @@ export default function Add({ navigation }) {
 
     return (
         <View style={[ScreenContainer, { paddingTop: 50 }]}>
-           
             <MyInput
                 inputName={"Title"}
                 value={title}
@@ -55,6 +53,29 @@ export default function Add({ navigation }) {
                 textUpdateFunction={setDescription}
                 customStyle={{ height: 100 }}
             />
+
+            <View style={styles.utilitiesContainer}>
+                <MyPressable
+                    pressedFunction={() =>
+                        console.log("pressed image snapping")
+                    }
+                    customStyle={styles.utilitiesButtons}
+                    pressedStyle={{ opacity: 0.8 }}
+                >
+                    <Text style={styles.text}>
+                        Snap an image of probable lost location
+                    </Text>
+                </MyPressable>
+                <MyPressable
+                    pressedFunction={() =>
+                        console.log("pressed location picker")
+                    }
+                    customStyle={styles.utilitiesButtons}
+                    pressedStyle={{ opacity: 0.5 }}
+                >
+                    <Text style={styles.text}>Pick location on map</Text>
+                </MyPressable>
+            </View>
 
             <View style={styles.pressablesContainer}>
                 <MyPressable
@@ -98,5 +119,27 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: COLORS.WHITE,
         fontWeight: "500",
+    },
+    utilitiesContainer: {
+        flexDirection: "row",
+        marginTop: 25,
+        width: "90%",
+        height: 200,
+        borderColor: "black",
+        alignItems: "center",
+        justifyContent: "center",
+        borderWidth: 10,
+    },
+    utilitiesButtons: {
+        // flex: 1,
+        width: 130,
+        height: 130,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 25,
+        paddingVertical: 7,
+        borderRadius: 3,
+        backgroundColor: COLORS.BLUE,
+        paddingHorizontal: 3,
     },
 });
