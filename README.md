@@ -19,11 +19,21 @@
 #### Screenshots:
 
 1. Login
-<img src="./Screenshots/Login.PNG" width="160"/>
-- 2
-- 3
-- 4
-- 5
+<img src="./Screenshots/Login.PNG" width="180"/>
+2. Signup
+<img src="./Screenshots/Login.PNG" width="180"/>
+3. Home
+<img src="./Screenshots/Login.PNG" width="180"/>
+4. MyList
+<img src="./Screenshots/Login.PNG" width="180"/>
+5. Post
+<img src="./Screenshots/Login.PNG" width="180"/>
+6. ItemDetails
+<img src="./Screenshots/Login.PNG" width="180"/>
+7. Map
+<img src="./Screenshots/Login.PNG" width="180"/>
+
+
 
 # Iteration 1
 
