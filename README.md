@@ -19,7 +19,7 @@
 #### Screenshots:
 
 - TeX (Based on KaTeX);
-  ![Login](./Screenshots/Login.PNG)
+  ![Login](./Screenshots/Login.PNG =200x600)
 - 2
 - 3
 - 4
