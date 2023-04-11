@@ -19,7 +19,7 @@
 #### Screenshots:
 
 1. Login
-<pre>  <img src="./Screenshots/Login.PNG" width="160"/>  </pre>
+<img src="./Screenshots/Login.PNG" width="160"/>
 - 2
 - 3
 - 4
