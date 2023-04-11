@@ -20,22 +20,22 @@
 #### Screenshots:
 
 1. Login
-   <img src="./Screenshots/Login.PNG" width="180"/>
+<pre> <img src="./Screenshots/Login.PNG" width="180"/> </pre>
 
 2. Signup
-   <img src="./Screenshots/Signup.PNG" width="180"/>
+<pre> <img src="./Screenshots/Signup.PNG" width="180"/> </pre>
 
 3. Home - home screen shows all posts/lost items from a user's community
-   <img src="./Screenshots/Home.PNG" width="180"/>
+<pre> <img src="./Screenshots/Home.PNG" width="180"/> </pre>
 
 4. MyList - shows only the user's own posts
-   <img src="./Screenshots/MyList.PNG" width="180"/>
+<pre> <img src="./Screenshots/MyList.PNG" width="180"/> </pre>
 
 5. Post
 <pre> <img src="./Screenshots/Post.PNG" width="180"/> <img src="./Screenshots/Post 1.PNG" width="180"/> <img src="./Screenshots/Post 2.PNG" width="180"/> <img src="./Screenshots/Post 3.PNG" width="180"/> <img src="./Screenshots/Post 4.PNG" width="180"/> </pre>
 
 6. ItemDetails - clicking on a post in Home or MyList will route to this page, showing all details of said post/item.
-   <img src="./Screenshots/ItemDetails.PNG" width="180"/>
+<pre> <img src="./Screenshots/ItemDetails.PNG" width="180"/> </pre>
 
 # Iteration 1
 
