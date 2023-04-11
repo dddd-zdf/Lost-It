@@ -4,13 +4,13 @@
 
 # Iteration 2
 
-####Contribution:
+#### Contribution:
 
 - Difei - Implemented Authentication functionality
 - Zia - Implemented Camera functionality
 - Aly - Implemented Location functionality
 
-####Screenshots:
+#### Screenshots:
 
 - TeX (Based on KaTeX);
   ![Login](./Screenshots/Login.PNG)
@@ -21,12 +21,12 @@
 
 # Iteration 1
 
-####Contribution:
+#### Contribution:
 
 - Difei - Implemented Navigation functionality
 - Zia & Aly - Implemented CRUD operations
 
-####Screenshots:
+#### Screenshots:
 
 - TeX (Based on KaTeX);
 - 2
