@@ -18,8 +18,8 @@
 
 #### Screenshots:
 
-- Login
-<img src="./Screenshots/Login.PNG" width="312" height="640">)
+1. Login
+<pre>  <img src="./Screenshots/Login.PNG" width="160"/>  </pre>
 - 2
 - 3
 - 4
