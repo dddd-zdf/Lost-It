@@ -1,8 +1,12 @@
 import { View, Text, Button, Alert, Image } from "react-native";
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import MyPressable from "./MyPressable";
 
-export default function ImageManager({ imageUriHandler }) {
+export default function ImageManager({
+  imageUriHandler,
+  customPressableStyle,
+}) {
   const [imageUri, setImageUri] = useState("");
   const [permissionInfo, requestPermission] =
     ImagePicker.useCameraPermissions();
@@ -28,9 +32,9 @@ export default function ImageManager({ imageUriHandler }) {
 
     try {
       //   console.log("first")
-      const result = await ImagePicker.launchCameraAsync(
-        {allowsEditing: true}
-      );
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+      });
       console.log(result);
       if (!result.canceled) {
         setImageUri(result.assets[0].uri);
@@ -41,11 +45,34 @@ export default function ImageManager({ imageUriHandler }) {
     }
   }
   return (
-    <View>
-      <Button title="Take a picture" onPress={imageHandler} />
-      {imageUri && (
-        <Image source={{ uri: imageUri }} style={{ width: 100, height: 100 }} />
-      )}
-    </View>
+    <>
+      {/* <View>
+        <Button title="Take a picture" onPress={imageHandler} />
+        {imageUri && (
+          <Image
+            source={{ uri: imageUri }}
+            style={{ width: 100, height: 100 }}
+          />
+        )}
+      </View> */}
+
+      <MyPressable
+        pressedFunction={imageHandler}
+        customStyle={customPressableStyle}
+        pressedStyle={{ opacity: 0.5 }}
+      >
+        {imageUri ? (
+          <Image
+            source={{ uri: imageUri }}
+            style={{
+              width: customPressableStyle.width,
+              height: customPressableStyle.height,
+            }}
+          />
+        ) : (
+          <Text style={{ color: "white" }}>Take a picture</Text>
+        )}
+      </MyPressable>
+    </>
   );
 }
