@@ -19,7 +19,7 @@
 #### Screenshots:
 
 - TeX (Based on KaTeX);
-  <img src="./Screenshots/Login.png" width="100" height="400">)
+  <img src="./Screenshots/Login.PNG" width="78" height="160">)
 - 2
 - 3
 - 4
