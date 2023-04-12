@@ -39,15 +39,18 @@ export default function Add({ navigation }) {
     setLocation(null);
   }
 
-  function onSubmit(title, description) {
+  async function onSubmit(title, description) {
     if (checkNotEmpty(title, description)) {
+      let imageUriStorage = ""
+      imageUriStorage  =  await fetchImage(imageUri);
       let newEntry = {
         title: title,
         description: description,
         userId: user.uid,
         location: location ? location : DefaultLocation,
+        imageUri: imageUriStorage,
       };
-      fetchImage(imageUri);
+      
       // add to db
       writeToDB(newEntry);
       resetInputs();
@@ -68,7 +71,7 @@ export default function Add({ navigation }) {
       const imageName = uri.substring(uri.lastIndexOf("/") + 1);
       const imageRef = await ref(storage, `images/${imageName}`);
       const uploadResult = await uploadBytesResumable(imageRef, imageBlob);
-      console.log(uploadResult);
+      return uploadResult.metadata.fullPath;
     } catch (err) {
       console.log("image fetch error", err);
     }

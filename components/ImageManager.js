@@ -12,11 +12,13 @@ export default function ImageManager({
     ImagePicker.useCameraPermissions();
 
   async function verifyPermission() {
+    console.log(permissionInfo)
     if (permissionInfo.granted) {
       return true;
     }
     try {
       const permissionResult = await requestPermission();
+      console.log(permissionResult)
       return permissionResult.granted;
     } catch (err) {
       console.log("Permission request error", err);
@@ -30,9 +32,8 @@ export default function ImageManager({
     }
 
     try {
-      const result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-      });
+      const result = await ImagePicker.launchCameraAsync();
+      
       if (!result.canceled) {
         setImageUri(result.assets[0].uri);
         imageUriHandler(result.assets[0].uri);
