@@ -50,6 +50,8 @@ export default function Add({ navigation }) {
         userId: user.uid,
         location: location ? location : DefaultLocation,
         imageUri: imageUriStorage,
+        uploader: user.displayName,
+        uploaderEmail: user.email,
       };
 
       // add to db
