@@ -37,12 +37,13 @@ export default function Add({ navigation }) {
     setTitle("");
     setDescription("");
     setLocation(null);
+    setImageUri("");
   }
 
   async function onSubmit(title, description) {
     if (checkNotEmpty(title, description)) {
-      let imageUriStorage = ""
-      imageUriStorage  =  await fetchImage(imageUri);
+      let imageUriStorage = "";
+      imageUriStorage = await fetchImage(imageUri);
       let newEntry = {
         title: title,
         description: description,
@@ -50,7 +51,7 @@ export default function Add({ navigation }) {
         location: location ? location : DefaultLocation,
         imageUri: imageUriStorage,
       };
-      
+
       // add to db
       writeToDB(newEntry);
       resetInputs();
@@ -60,8 +61,6 @@ export default function Add({ navigation }) {
   }
   const imageUriHandler = (uri) => {
     setImageUri(uri);
-    console.log("from add", uri);
-    // fetchImage(uri);
   };
 
   async function fetchImage(uri) {
@@ -96,6 +95,7 @@ export default function Add({ navigation }) {
           <ImageManager
             imageUriHandler={imageUriHandler}
             customPressableStyle={styles.utilitiesButtons}
+            imageURI={imageUri}
           />
           <LocationManager
             location={location}

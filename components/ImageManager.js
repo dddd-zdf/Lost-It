@@ -6,8 +6,9 @@ import MyPressable from "./MyPressable";
 export default function ImageManager({
   imageUriHandler,
   customPressableStyle,
+  imageURI,
 }) {
-  const [imageUri, setImageUri] = useState("");
+  const [imageUri, setImageUri] = useState(imageURI);
   const [permissionInfo, requestPermission] =
     ImagePicker.useCameraPermissions();
 
@@ -44,22 +45,13 @@ export default function ImageManager({
   }
   return (
     <>
-      {/* <View>
-        <Button title="Take a picture" onPress={imageHandler} />
-        {imageUri && (
-          <Image
-            source={{ uri: imageUri }}
-            style={{ width: 100, height: 100 }}
-          />
-        )}
-      </View> */}
 
       <MyPressable
         pressedFunction={imageHandler}
         customStyle={customPressableStyle}
         pressedStyle={{ opacity: 0.5 }}
       >
-        {imageUri ? (
+        {imageURI ? (
           <Image
             source={{ uri: imageUri }}
             style={{
