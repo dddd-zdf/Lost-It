@@ -11,22 +11,21 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Detail({ route, navigation }) {
-  const { key, title, description, userId, location } = route.params;
+  const { key, title, description, userId, location, imageUri } = route.params;
   const [user] = useAuthState(auth);
   const [imageURL, setImageURL] = useState("");
   useEffect(() => {
     async function getImageUrl() {
       try {
-        const reference = ref(storage, route.params.imageUri);
+        const reference = ref(storage, imageUri);
         const url = await getDownloadURL(reference);
         setImageURL(url);
       } catch (err) {
         console.log("get image url", err);
       }
     }
-
     getImageUrl();
-  }, []);
+  }, [imageUri]);
   function onEditPress() {
     if (userId !== user.uid) {
       Alert.alert("No Access");
@@ -36,6 +35,7 @@ export default function Detail({ route, navigation }) {
         description,
         key,
         location,
+        imageURL,
       });
     }
   }
@@ -68,15 +68,6 @@ export default function Detail({ route, navigation }) {
         <Text style={styles.text}>{`Description:  ${description}`}</Text>
 
         <View style={styles.utilitiesContainer}>
-          {/* <MyPressable
-                        pressedFunction={() =>
-                            console.log("pressed image snapping")
-                        }
-                        customStyle={styles.utilitiesButtons}
-                        pressedStyle={{ opacity: 0.8 }}
-                    >
-                        <Text style={styles.text}>Image</Text>
-                    </MyPressable> */}
           {imageURL && (
             <Image
               source={{

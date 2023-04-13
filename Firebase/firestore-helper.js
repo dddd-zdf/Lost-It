@@ -28,7 +28,8 @@ export async function UpdateDB(
     id,
     updatedTitle,
     updatedDescription,
-    updatedLocation
+    updatedLocation,
+    updatedUri
 ) {
     try {
         //   await updateDoc(doc(firestore, "entries", id.toString()));
@@ -36,6 +37,7 @@ export async function UpdateDB(
             title: updatedTitle,
             description: updatedDescription,
             location: updatedLocation,
+            imageUri: updatedUri,
         });
     } catch (err) {
         console.log(err);
