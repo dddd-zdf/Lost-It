@@ -11,7 +11,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Detail({ route, navigation }) {
-  const { key, title, description, userId, location, imageUri } = route.params;
+  const { key, title, description, userId, uploader, uploaderEmail, location, imageUri } = route.params;
   const [user] = useAuthState(auth);
   const [imageURL, setImageURL] = useState("");
   useEffect(() => {
@@ -65,6 +65,8 @@ export default function Detail({ route, navigation }) {
     <View style={[ScreenContainer, { paddingTop: 70 }]}>
       <View style={styles.container}>
         <Text style={styles.text}>{`Title:  ${title}`}</Text>
+        <Text style={styles.text}>{`User:  ${uploader}`}</Text>
+        <Text style={styles.text}>{`Contact:  ${uploaderEmail}`}</Text>
         <Text style={styles.text}>{`Description:  ${description}`}</Text>
 
         <View style={styles.utilitiesContainer}>

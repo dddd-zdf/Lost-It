@@ -1,12 +1,13 @@
 import { View, Text, TextInput, Button, Alert } from "react-native";
 import React, { useState } from "react";
 import { auth } from "../Firebase/firebase-setup";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
+  const [name, setName] = useState(null);
 
   const loginHandler = () => {
     navigation.replace("Login");
@@ -14,7 +15,16 @@ export default function Signup({ navigation }) {
 
   const signupHandler = async () => {
     if (password !== confirmPassword) {
-      Alert.alert("The passwords don't match");
+      Alert.alert("The passwords don't match")
+      return;
+    }
+    if (!name || name.trim() === '') {
+      Alert.alert("A name is required");
+      return;
+    }
+    if (!email || !password || !confirmPassword) {
+      Alert.alert("Please fill in all fields");
+      return;
     }
     try {
       const userCred = await createUserWithEmailAndPassword(
@@ -22,14 +32,27 @@ export default function Signup({ navigation }) {
         email,
         password
       );
-      // console.log(userCred);
+
+      // Update user's display name
+      await updateProfile(userCred.user, { displayName: name });
+
     } catch (err) {
       Alert.alert(err.code);
       console.log("Auth error ", err);
     }
   };
+  
   return (
     <View>
+      <Text>Name</Text>
+      <TextInput
+        value={name}
+        onChangeText={(newName) => {
+          setName(newName);
+        }}
+        placeholder="Name"
+      />
+
       <Text>Email</Text>
       <TextInput
         value={email}
@@ -38,6 +61,7 @@ export default function Signup({ navigation }) {
         }}
         placeholder="Email"
       />
+
       <Text>Password</Text>
       <TextInput
         value={password}
@@ -53,7 +77,7 @@ export default function Signup({ navigation }) {
         onChangeText={(newPassword) => {
           setConfirmPassword(newPassword);
         }}
-        placeholder=" Confrim Password"
+        placeholder="Confirm Password"
         secureTextEntry={true}
       />
       <Button title="Register" onPress={signupHandler} />

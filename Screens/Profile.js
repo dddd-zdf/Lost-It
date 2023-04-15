@@ -5,6 +5,16 @@ import { auth } from "../Firebase/firebase-setup";
 
 
 export default function Profile({navigation}) {
+
+  const user = auth.currentUser;
+  let displayName = null;
+  let email = null;
+
+  if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    displayName = user.displayName;
+    email = user.email;
+  }
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -17,23 +27,8 @@ export default function Profile({navigation}) {
   return (
     
     <View>
-      {/* <Text>Profile Screen</Text>
-      <Pressable
-        onPress={() => navigation.navigate('Item List')}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? 'gray' : 'white'
-          },
-          {
-            padding: 10,
-            borderRadius: 5,
-            marginTop: 10
-          }
-        ]}
-      >
-        <Text>Go to item list under this user profile</Text>
-      </Pressable> */}
-      <Text>Profile Screen</Text>
+      <Text>Name: {displayName}</Text>
+      <Text>Email: {email}</Text>
       <Button title="Sign Out" onPress={handleSignOut} />
 
     </View>
