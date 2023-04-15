@@ -31,11 +31,14 @@ export default function Detail({ route, navigation }) {
       Alert.alert("No Access");
     } else {
       navigation.navigate("Edit Item", {
-        title,
-        description,
-        key,
-        location,
-        imageURL,
+        key, 
+        title, 
+        description, 
+        userId, 
+        uploader, 
+        uploaderEmail, 
+        location, 
+        imageURL
       });
     }
   }
