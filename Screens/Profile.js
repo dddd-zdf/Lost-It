@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, Button } from 'react-native';
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/firebase-setup";
+import NotificationManager from '../components/NotificationManager';
 
 
 export default function Profile({navigation}) {
@@ -29,6 +30,7 @@ export default function Profile({navigation}) {
     <View>
       <Text>Name: {displayName}</Text>
       <Text>Email: {email}</Text>
+      <NotificationManager/>
       <Button title="Sign Out" onPress={handleSignOut} />
 
     </View>
