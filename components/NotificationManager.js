@@ -4,7 +4,7 @@ import * as Notifications from "expo-notifications";
 
 export async function verifyPermission() {
   const permissionResponse = await Notifications.getPermissionsAsync();
-  console.log(permissionResponse)
+  console.log(permissionResponse);
   if (permissionResponse.granted) {
     return true;
   }
@@ -25,9 +25,9 @@ export default function NotificationManager() {
         content: {
           title: "Reminder to check Lostit",
           body: "Check if someone posted an item that you found",
-         
         },
-        trigger: { seconds: 5 },
+        // trigger: { seconds: 10 },
+        trigger: { hour: 12, minute: 0, second: 0, repeats: true },
       });
     } catch (err) {
       console.log("schedule notification error: " + err);
@@ -36,7 +36,7 @@ export default function NotificationManager() {
   return (
     <View>
       <Button
-        title="Get a reminder to check the app in 10 minutes?"
+        title="Get a reminder to check the app once daily?"
         onPress={scheduleNotificationHandler}
       />
     </View>

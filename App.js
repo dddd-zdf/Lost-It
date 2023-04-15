@@ -18,6 +18,7 @@ import Signup from "./Screens/Signup";
 import Map from "./Screens/Map";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase/firebase-setup";
+import * as Notifications from "expo-notifications";
 
 const Tab = createBottomTabNavigator();
 
@@ -114,6 +115,16 @@ const AppStack = (
         />
     </>
 );
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => {
+      return {
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+      };
+    },
+  });
 
 export default function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
