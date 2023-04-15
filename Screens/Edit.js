@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyInput from "../components/MyInput";
 import MyPressable from "../components/MyPressable";
-import { UpdateDB } from "../Firebase/firestore-helper";
+import { UpdateDB, ReadFromDBonId } from "../Firebase/firestore-helper";
 import LocationManager from "../components/LocationManager";
 import ImageManager from "../components/ImageManager";
 import { ref, uploadBytesResumable } from "firebase/storage";
@@ -19,7 +19,6 @@ import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
   const { title, description, key, location, imageURL } = route.params;
-
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);
@@ -59,12 +58,8 @@ export default function Edit({ route, navigation }) {
       imageUriStorage
     );
 
-    let entry = {
-      title: updatedTitle,
-      description: updatedDescription,
-      location: updatedLocation,
-      imageUri: imageUriStorage,
-    };
+    let entry = await ReadFromDBonId(savedKey);
+    entry.key=savedKey;
     return navigation.navigate("Item Details", entry);
   }
 
