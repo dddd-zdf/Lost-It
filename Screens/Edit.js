@@ -87,7 +87,7 @@ export default function Edit({ route, navigation }) {
           <ImageManager
             imageUriHandler={imageUriHandler}
             customPressableStyle={styles.utilitiesButtons}
-            imageURI={imageURL}
+            imageURI={imageUri}
           />
 
           <LocationManager
