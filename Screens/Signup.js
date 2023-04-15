@@ -2,6 +2,7 @@ import { View, Text, TextInput, Button, Alert } from "react-native";
 import React, { useState } from "react";
 import { auth } from "../Firebase/firebase-setup";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUser } from "../Firebase/firestore-helper";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(null);
@@ -35,7 +36,7 @@ export default function Signup({ navigation }) {
 
       // Update user's display name
       await updateProfile(userCred.user, { displayName: name });
-
+      createUser(userCred.user.uid, email, name);
     } catch (err) {
       Alert.alert(err.code);
       console.log("Auth error ", err);

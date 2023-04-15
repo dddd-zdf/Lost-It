@@ -1,12 +1,14 @@
 import {
     collection,
     addDoc,
+    setDoc,
     doc,
     deleteDoc,
     updateDoc,
     getDoc
 } from "firebase/firestore";
 import { firestore } from "./firebase-setup";
+
 
 export async function writeToDB(entry) {
     try {
@@ -59,5 +61,32 @@ export async function ReadFromDBonId(id) {
       console.log(err);
       return null;
     }
-  }
+}
   
+export async function createUser(id, email, displayName) {
+    try {
+        const docRef = await setDoc(doc(firestore, 'users', id), {
+            email: email,
+            displayName: displayName,
+            createdAt: Date.now(),
+        });
+        console.log(id);
+    } catch (err) {
+        console.log(err);
+    }
+}
+export async function getUser(id) {
+    try {
+        const docRef = doc(firestore, "users", id);
+        const docSnap = await getDoc(docRef);  
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          console.log("No such document!");
+          return null;
+        }
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
+  }
