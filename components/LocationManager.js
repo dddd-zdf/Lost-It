@@ -41,7 +41,7 @@ export default function LocationManager({
                 returnScreen: returnScreen,
             });
         } else if (!permissionReceived) {
-            navigation.navigate("Map", { returnScreen: returnScreen });
+            navigation.goBack();
         } else {
             try {
                 const result = await Location.getLastKnownPositionAsync();

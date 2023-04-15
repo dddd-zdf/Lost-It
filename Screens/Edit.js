@@ -18,7 +18,7 @@ import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
-  const { title, description, key, location, imageURL } = route.params;
+  const { title, description, key, location, imageURL, uploader, uploaderEmail } = route.params;
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);
@@ -85,12 +85,24 @@ export default function Edit({ route, navigation }) {
             imageURI={imageUri}
           />
 
-          <LocationManager
-            location={updatedLocation ? updatedLocation : location}
-            setLocation={setUpdatedLocation}
-            customPressableStyle={styles.utilitiesButtons}
-            returnScreen={"Edit Item"}
-          />
+        <LocationManager
+          location={updatedLocation ? updatedLocation : location}
+          setLocation={setUpdatedLocation}
+          customPressableStyle={styles.utilitiesButtons}
+          returnScreen={{
+            name: "Edit Item",
+            params: {
+              title,
+              description,
+              key,
+              location,
+              imageURL,
+              uploaderEmail,
+              uploader,
+            },
+          }}
+        />
+
         </View>
 
         <View style={styles.pressablesContainer}>
