@@ -49,9 +49,10 @@ export async function UpdateDB(
 
 export async function ReadFromDBonId(id) {
     try {
-      const docRef = doc(firestore, "entries", id);
+      const docRef = doc(firestore, "locations", id);
       const docSnap = await getDoc(docRef);  
       if (docSnap.exists()) {
+        console.log(docSnap);
         return docSnap.data();
       } else {
         console.log("No such document!");
@@ -70,7 +71,7 @@ export async function createUser(id, email, displayName) {
             displayName: displayName,
             createdAt: Date.now(),
         });
-        console.log(id);
+        console.log(docRef.id);
     } catch (err) {
         console.log(err);
     }
@@ -82,11 +83,40 @@ export async function getUser(id) {
         if (docSnap.exists()) {
           return docSnap.data();
         } else {
-          console.log("No such document!");
+          console.log("No such user!");
           return null;
         }
       } catch (err) {
         console.log(err);
         return null;
       }
-  }
+}
+
+export async function getAddressFromDB(location) {
+    try {
+        const docRef = doc(firestore, "locations", `${location.latitude},${location.longitude}`);
+        const docSnap = await getDoc(docRef);  
+        if (docSnap.exists()) {
+            return docSnap.data().address;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}
+
+export async function writeLocationToDB(location, address) {
+    try {
+        //use coordinates as document id
+        const id = `${location.latitude},${location.longitude}`;
+        const locationsRef = await setDoc(doc(firestore, 'locations', id), {
+            latitude: location.latitude,
+            longitude: location.latitude,
+            address: address,
+    });
+    } catch (err) {
+        console.log(err);
+    }
+}
