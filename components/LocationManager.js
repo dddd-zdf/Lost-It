@@ -48,7 +48,7 @@ export default function LocationManager({
     }
   
     useEffect(() => {
-        if (route.params) {
+        if (route.params && route.params.selectedLocation) {
             setLocation({
                 latitude: Number(route.params.selectedLocation.latitude.toFixed(rounding)),
                 longitude: Number(route.params.selectedLocation.longitude.toFixed(rounding))

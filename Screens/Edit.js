@@ -11,22 +11,21 @@ import React, { useState, useEffect } from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyInput from "../components/MyInput";
 import MyPressable from "../components/MyPressable";
-import { UpdateDB, ReadFromDBonId } from "../Firebase/firestore-helper";
+import { UpdateDB } from "../Firebase/firestore-helper";
 import LocationManager from "../components/LocationManager";
 import ImageManager from "../components/ImageManager";
 import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
-  const { title, description, key, location, imageURL, uploader, uploaderEmail } = route.params;
-  console.log(location);
+  const { title, description, key, location, imageURL, uploader, uploaderEmail, address, userId } = route.params;
+
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);
   const [savedKey, setSavedKey] = useState(key);
-
   const [imageUri, setImageUri] = useState(imageURL);
-
+  const [updatedAddress, setUpdatedAddress] = useState(address);
   function cancel() {
     return navigation.goBack();
   }
@@ -48,19 +47,30 @@ export default function Edit({ route, navigation }) {
     setImageUri(uri);
   };
 
-  async function onSubmit(updatedTitle, updatedDescription, updatedLocation) {
+  async function onSubmit(updatedTitle, updatedDescription, updatedLocation, updatedAddress, uploader, uploaderEmail) {
     let imageUriStorage = "";
     imageUriStorage = await fetchImage(imageUri);
+    console.log('address:', updatedAddress);
     UpdateDB(
       savedKey,
       updatedTitle,
       updatedDescription,
       updatedLocation,
-      imageUriStorage
+      imageUriStorage,
+      updatedAddress
     );
 
-    let entry = await ReadFromDBonId(savedKey);
-    entry.key=savedKey;
+    let entry = {
+      title: updatedTitle,
+      description: updatedDescription,
+      location: updatedLocation,
+      imageUri: imageUriStorage,
+      address: updatedAddress,
+      uploader: uploader,
+      uploaderEmail, uploaderEmail,
+      userId,
+    };
+    console.log(uploader);
     return navigation.navigate("Item Details", entry);
   }
 
@@ -79,6 +89,8 @@ export default function Edit({ route, navigation }) {
           customStyle={{ height: 100 }}
         />
 
+        <Text>{updatedAddress ? updatedAddress : address}</Text>
+
         <View style={styles.utilitiesContainer}>
           <ImageManager
             imageUriHandler={imageUriHandler}
@@ -86,24 +98,14 @@ export default function Edit({ route, navigation }) {
             imageURI={imageUri}
           />
 
-        <LocationManager
-          location={updatedLocation ? updatedLocation : location}
-          setLocation={setUpdatedLocation}
-          customPressableStyle={styles.utilitiesButtons}
-          returnScreen={{
-            name: "Edit Item",
-            params: {
-              title,
-              description,
-              key,
-              location,
-              imageURL,
-              uploaderEmail,
-              uploader,
-            },
-          }}
-        />
-
+          <LocationManager
+            location={updatedLocation ? updatedLocation : location}
+            address={updatedAddress ? updatedAddress : address}
+            setLocation={setUpdatedLocation}
+            setAddress={setUpdatedAddress}
+            customPressableStyle={styles.utilitiesButtons}
+            returnScreen={"Edit Item"}
+          />
         </View>
 
         <View style={styles.pressablesContainer}>
@@ -119,7 +121,10 @@ export default function Edit({ route, navigation }) {
               onSubmit(
                 updatedTitle,
                 updatedDescription,
-                updatedLocation ? updatedLocation : location
+                updatedLocation ? updatedLocation : location,
+                updatedAddress ? updatedAddress : address,
+                uploader,
+                uploaderEmail
               )
             }
             customStyle={styles.pressable}
