@@ -50,7 +50,6 @@ export default function Edit({ route, navigation }) {
   async function onSubmit(updatedTitle, updatedDescription, updatedLocation, updatedAddress, uploader, uploaderEmail) {
     let imageUriStorage = "";
     imageUriStorage = await fetchImage(imageUri);
-    console.log('address:', updatedAddress);
     UpdateDB(
       savedKey,
       updatedTitle,
@@ -70,7 +69,6 @@ export default function Edit({ route, navigation }) {
       uploaderEmail, uploaderEmail,
       userId,
     };
-    console.log(uploader);
     return navigation.navigate("Item Details", entry);
   }
 
