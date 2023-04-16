@@ -5,11 +5,13 @@ import { MAPS_API_KEY } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MyPressable from "./MyPressable";
 import MapView, { Marker } from "react-native-maps";
+import Geocoder from "react-native-geocoding";
 
 export default function LocationManager({
     customPressableStyle,
     location,
     setLocation,
+    setAddress,
     returnScreen,
 }) {
     const [permissionResponse, requestPermission] =
@@ -23,6 +25,23 @@ export default function LocationManager({
             setLocation(route.params.selectedLocation);
         }
     }, [route]);
+
+
+    //reverse geocoding
+    useEffect(() => {
+        if (location) {
+            Geocoder.from(location)
+            .then(json => {
+                var addressComponent = json.results[0].formatted_address;
+                setAddress(addressComponent);
+                console.log(addressComponent);
+            })
+            .catch(error => Alert.alert(error));
+        }
+    }, [location]);
+
+
+
 
     async function verifyPermission() {
         console.log(permissionResponse);
@@ -50,6 +69,16 @@ export default function LocationManager({
                     longitude: result.coords.longitude,
                 };
                 setLocation(myLocation);
+
+                // Reverse geocoding
+                Geocoder.from(location)
+                .then(json => {
+                    var addressComponent = json.results[0].formatted_address;
+                    setAddress(addressComponent);
+                    console.log(addressComponent);
+                })
+                .catch(error => Alert.alert(error));
+
                 navigation.navigate("Map", {
                     currentLocation: myLocation,
                     returnScreen: returnScreen,
