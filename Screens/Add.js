@@ -52,6 +52,7 @@ export default function Add({ navigation }) {
         imageUri: imageUriStorage,
         uploader: user.displayName,
         uploaderEmail: user.email,
+        address: address,
       };
 
       // add to db

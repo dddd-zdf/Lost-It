@@ -19,6 +19,7 @@ import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
   const { title, description, key, location, imageURL, uploader, uploaderEmail } = route.params;
+  console.log(location);
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);

@@ -71,7 +71,7 @@ export async function createUser(id, email, displayName) {
             displayName: displayName,
             createdAt: Date.now(),
         });
-        console.log(docRef.id);
+        console.log(id);
     } catch (err) {
         console.log(err);
     }
@@ -115,7 +115,8 @@ export async function writeLocationToDB(location, address) {
             latitude: location.latitude,
             longitude: location.latitude,
             address: address,
-    });
+        })
+        console.log(id);
     } catch (err) {
         console.log(err);
     }
