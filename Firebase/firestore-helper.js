@@ -48,23 +48,6 @@ export async function UpdateDB(
         console.log(err);
     }
 }
-
-export async function ReadFromDBonId(id) {
-    try {
-      const docRef = doc(firestore, "locations", id);
-      const docSnap = await getDoc(docRef);  
-      if (docSnap.exists()) {
-        console.log(docSnap);
-        return docSnap.data();
-      } else {
-        console.log("No such document!");
-        return null;
-      }
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-}
   
 export async function createUser(id, email, displayName) {
     try {
