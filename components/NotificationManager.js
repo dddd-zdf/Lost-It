@@ -23,12 +23,14 @@ export default function NotificationManager() {
     try {
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "Reminder to check Lostit",
+          title: "Reminder to check LostIt",
           body: "Check if someone posted an item that you found",
         },
         // trigger: { seconds: 10 },
-        trigger: { hour: 12, minute: 0, second: 0, repeats: true },
+        trigger: { hour: 12, minute: 0, repeats: true },
+        
       });
+      Alert.alert("Daily reminder set at 12pm");
     } catch (err) {
       console.log("schedule notification error: " + err);
     }
