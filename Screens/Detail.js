@@ -27,9 +27,6 @@ export default function Detail({ route, navigation }) {
     getImageUrl();
   }, [imageUri]);
   function onEditPress() {
-    if (userId !== user.uid) {
-      Alert.alert("No Access");
-    } else {
       navigation.navigate("Edit Item", {
         key, 
         title, 
@@ -41,13 +38,9 @@ export default function Detail({ route, navigation }) {
         imageURL,
         address,
       });
-    }
   }
 
   function onDeletePress() {
-    if (userId !== user.uid) {
-      Alert.alert("No Access");
-    } else {
       Alert.alert("Delete", "Are you sure you want to delete this entry?", [
         {
           text: "Yes",
@@ -62,7 +55,6 @@ export default function Detail({ route, navigation }) {
           style: "cancel",
         },
       ]);
-    }
   }
 
   return (
