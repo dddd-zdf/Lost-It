@@ -19,6 +19,11 @@ import Map from "./Screens/Map";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase/firebase-setup";
 import * as Notifications from "expo-notifications";
+import { MAPS_API_KEY } from "@env";
+import Geocoder from 'react-native-geocoding';
+
+
+Geocoder.init(MAPS_API_KEY);
 
 const Tab = createBottomTabNavigator();
 

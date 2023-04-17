@@ -24,7 +24,7 @@ export default function Add({ navigation }) {
   const [user] = useAuthState(auth);
   const [location, setLocation] = useState(null);
   const [imageUri, setImageUri] = useState("");
-
+  const [address, setAddress] = useState(null);
   function checkNotEmpty(title, description) {
     if (!title.trim() || !description.trim()) {
       return false;
@@ -52,6 +52,7 @@ export default function Add({ navigation }) {
         imageUri: imageUriStorage,
         uploader: user.displayName,
         uploaderEmail: user.email,
+        address: address,
       };
 
       // add to db
@@ -93,6 +94,10 @@ export default function Add({ navigation }) {
           customStyle={{ height: 100 }}
         />
 
+        <View>
+          <Text>{address}</Text>
+        </View>
+
         <View style={styles.utilitiesContainer}>
           <ImageManager
             imageUriHandler={imageUriHandler}
@@ -102,6 +107,7 @@ export default function Add({ navigation }) {
           <LocationManager
             location={location}
             setLocation={setLocation}
+            setAddress={setAddress}
             customPressableStyle={styles.utilitiesButtons}
             returnScreen={"Post"}
           />

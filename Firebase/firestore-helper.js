@@ -32,7 +32,8 @@ export async function UpdateDB(
     updatedTitle,
     updatedDescription,
     updatedLocation,
-    updatedUri
+    updatedUri,
+    updatedAddress
 ) {
     try {
         //   await updateDoc(doc(firestore, "entries", id.toString()));
@@ -41,25 +42,11 @@ export async function UpdateDB(
             description: updatedDescription,
             location: updatedLocation,
             imageUri: updatedUri,
+            address: updatedAddress,
         });
+        console.log(id.toString());
     } catch (err) {
         console.log(err);
-    }
-}
-
-export async function ReadFromDBonId(id) {
-    try {
-      const docRef = doc(firestore, "entries", id);
-      const docSnap = await getDoc(docRef);  
-      if (docSnap.exists()) {
-        return docSnap.data();
-      } else {
-        console.log("No such document!");
-        return null;
-      }
-    } catch (err) {
-      console.log(err);
-      return null;
     }
 }
   
@@ -82,11 +69,41 @@ export async function getUser(id) {
         if (docSnap.exists()) {
           return docSnap.data();
         } else {
-          console.log("No such document!");
+          console.log("No such user!");
           return null;
         }
       } catch (err) {
         console.log(err);
         return null;
       }
-  }
+}
+
+export async function getAddressFromDB(location) {
+    try {
+        const docRef = doc(firestore, "locations", `${location.latitude},${location.longitude}`);
+        const docSnap = await getDoc(docRef);  
+        if (docSnap.exists()) {
+            return docSnap.data().address;
+        } else {
+            return null;
+        }
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}
+
+export async function writeLocationToDB(location, address) {
+    try {
+        //use coordinates as document id
+        const id = `${location.latitude},${location.longitude}`;
+        const locationsRef = await setDoc(doc(firestore, 'locations', id), {
+            latitude: location.latitude,
+            longitude: location.latitude,
+            address: address,
+        })
+        console.log(id);
+    } catch (err) {
+        console.log(err);
+    }
+}

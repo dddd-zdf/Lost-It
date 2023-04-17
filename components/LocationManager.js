@@ -5,27 +5,74 @@ import { MAPS_API_KEY } from "@env";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MyPressable from "./MyPressable";
 import MapView, { Marker } from "react-native-maps";
+import Geocoder from "react-native-geocoding";
+import { getAddressFromDB, writeLocationToDB } from "../Firebase/firestore-helper";
+
+//round coordinate decimals to avoid unneccesary duplicates
+const rounding = 4;
+
 
 export default function LocationManager({
     customPressableStyle,
     location,
     setLocation,
+    setAddress,
     returnScreen,
 }) {
-    const [permissionResponse, requestPermission] =
-        Location.useForegroundPermissions();
-
+    const [permissionResponse, requestPermission] = Location.useForegroundPermissions();
     const navigation = useNavigation();
     const route = useRoute();
 
+    //reverse geocoding api
+    async function getAddressFromAPI(location) {
+        try {
+            const json = await Geocoder.from(location);
+            const addressComponent = json.results[0].formatted_address;
+            await writeLocationToDB(location, addressComponent);
+            return addressComponent;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    };
+      
+
+    //query in DB first, then API
+    async function getAddressFromLocation(location) {
+        let address = await getAddressFromDB(location);
+        if (!address) {
+            const apiAddress = await getAddressFromAPI(location);
+            address = apiAddress || 'Unknown address';
+        }
+        return address;
+    }
+  
     useEffect(() => {
-        if (route.params) {
-            setLocation(route.params.selectedLocation);
+        if (route.params && route.params.selectedLocation) {
+            setLocation({
+                latitude: Number(route.params.selectedLocation.latitude.toFixed(rounding)),
+                longitude: Number(route.params.selectedLocation.longitude.toFixed(rounding))
+            });
         }
     }, [route]);
 
+    //call on location change
+    useEffect(() => {
+        async function getAddress() {
+          if (location) {
+            const address = await getAddressFromLocation(location);
+            setAddress(address);
+            console.log(address);
+          }
+        }
+        getAddress();
+      }, [location]);
+      
+
+
+
+
     async function verifyPermission() {
-        console.log(permissionResponse);
         if (permissionResponse.granted) {
             return true;
         }
@@ -46,10 +93,15 @@ export default function LocationManager({
             try {
                 const result = await Location.getLastKnownPositionAsync();
                 let myLocation = {
-                    latitude: result.coords.latitude,
-                    longitude: result.coords.longitude,
+                    latitude: Number(result.coords.latitude.toFixed(rounding)),
+                    longitude: Number(result.coords.longitude.toFixed(rounding)),
                 };
                 setLocation(myLocation);
+                const address = await getAddressFromLocation(myLocation);
+                setAddress(address);
+                console.log(address);
+
+
                 navigation.navigate("Map", {
                     currentLocation: myLocation,
                     returnScreen: returnScreen,
