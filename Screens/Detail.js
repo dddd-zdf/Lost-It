@@ -27,9 +27,6 @@ export default function Detail({ route, navigation }) {
     getImageUrl();
   }, [imageUri]);
   function onEditPress() {
-    if (userId !== user.uid) {
-      Alert.alert("No Access");
-    } else {
       navigation.navigate("Edit Item", {
         key, 
         title, 
@@ -41,13 +38,9 @@ export default function Detail({ route, navigation }) {
         imageURL,
         address,
       });
-    }
   }
 
   function onDeletePress() {
-    if (userId !== user.uid) {
-      Alert.alert("No Access");
-    } else {
       Alert.alert("Delete", "Are you sure you want to delete this entry?", [
         {
           text: "Yes",
@@ -62,7 +55,6 @@ export default function Detail({ route, navigation }) {
           style: "cancel",
         },
       ]);
-    }
   }
 
   return (
@@ -97,23 +89,26 @@ export default function Detail({ route, navigation }) {
           />
         </View>
 
-        <View style={styles.pressablesContainer}>
-          <MyPressable
-            customStyle={styles.pressable}
-            pressedStyle={{ opacity: 0.8 }}
-            pressedFunction={onDeletePress}
-          >
-            <Text style={styles.buttonText}>Delete</Text>
-          </MyPressable>
+        {userId === user.uid && (
+  <View style={styles.pressablesContainer}>
+    <MyPressable
+      customStyle={styles.pressable}
+      pressedStyle={{ opacity: 0.8 }}
+      pressedFunction={onDeletePress}
+    >
+      <Text style={styles.buttonText}>Delete</Text>
+    </MyPressable>
 
-          <MyPressable
-            customStyle={styles.pressable}
-            pressedStyle={{ opacity: 0.8 }}
-            pressedFunction={onEditPress}
-          >
-            <Text style={styles.buttonText}>Edit</Text>
-          </MyPressable>
-        </View>
+    <MyPressable
+      customStyle={styles.pressable}
+      pressedStyle={{ opacity: 0.8 }}
+      pressedFunction={onEditPress}
+    >
+      <Text style={styles.buttonText}>Edit</Text>
+    </MyPressable>
+  </View>
+)}
+
       </View>
     </View>
   );
