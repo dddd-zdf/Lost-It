@@ -18,14 +18,24 @@ import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
-  const { title, description, key, location, imageURL, uploader, uploaderEmail, address, userId } = route.params;
-
+  const { title, description, location, imageURL, address} = route.params;
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);
-  const [savedKey, setSavedKey] = useState(key);
+  const [key, setKey] = useState();
   const [imageUri, setImageUri] = useState(imageURL);
   const [updatedAddress, setUpdatedAddress] = useState(address);
+  const [uploader, setUploader] = useState();
+  const [uploaderEmail, setUploaderEmail] = useState();
+  const [userId, setUserId] = useState();
+
+  useEffect(() => {
+    setUploader(route.params.uploader);
+    setUploaderEmail(route.params.uploaderEmail);
+    setUserId(route.params.userId);
+    setKey(route.params.key);
+  }, []);
+  
   function cancel() {
     return navigation.goBack();
   }
@@ -51,7 +61,7 @@ export default function Edit({ route, navigation }) {
     let imageUriStorage = "";
     imageUriStorage = await fetchImage(imageUri);
     UpdateDB(
-      savedKey,
+      key,
       updatedTitle,
       updatedDescription,
       updatedLocation,
@@ -60,14 +70,15 @@ export default function Edit({ route, navigation }) {
     );
 
     let entry = {
+      key: key,
       title: updatedTitle,
       description: updatedDescription,
       location: updatedLocation,
       imageUri: imageUriStorage,
       address: updatedAddress,
       uploader: uploader,
-      uploaderEmail, uploaderEmail,
-      userId,
+      uploaderEmail: uploaderEmail,
+      userId: userId
     };
     return navigation.navigate("Item Details", entry);
   }

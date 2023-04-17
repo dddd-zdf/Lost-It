@@ -44,6 +44,7 @@ export async function UpdateDB(
             imageUri: updatedUri,
             address: updatedAddress,
         });
+        console.log(id.toString());
     } catch (err) {
         console.log(err);
     }
