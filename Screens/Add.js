@@ -26,7 +26,7 @@ export default function Add({ navigation }) {
   const [imageUri, setImageUri] = useState("");
   const [address, setAddress] = useState(null);
   function checkNotEmpty(title, description) {
-    if (!title.trim() || !description.trim()) {
+    if (!title.trim() || !description.trim() || imageUri === "" || !location) {
       return false;
     } else {
       return true;
@@ -38,6 +38,7 @@ export default function Add({ navigation }) {
     setDescription("");
     setLocation(null);
     setImageUri("");
+    setAddress(null);
   }
 
   async function onSubmit(title, description) {
