@@ -97,23 +97,26 @@ export default function Detail({ route, navigation }) {
           />
         </View>
 
-        <View style={styles.pressablesContainer}>
-          <MyPressable
-            customStyle={styles.pressable}
-            pressedStyle={{ opacity: 0.8 }}
-            pressedFunction={onDeletePress}
-          >
-            <Text style={styles.buttonText}>Delete</Text>
-          </MyPressable>
+        {userId === user.uid && (
+  <View style={styles.pressablesContainer}>
+    <MyPressable
+      customStyle={styles.pressable}
+      pressedStyle={{ opacity: 0.8 }}
+      pressedFunction={onDeletePress}
+    >
+      <Text style={styles.buttonText}>Delete</Text>
+    </MyPressable>
 
-          <MyPressable
-            customStyle={styles.pressable}
-            pressedStyle={{ opacity: 0.8 }}
-            pressedFunction={onEditPress}
-          >
-            <Text style={styles.buttonText}>Edit</Text>
-          </MyPressable>
-        </View>
+    <MyPressable
+      customStyle={styles.pressable}
+      pressedStyle={{ opacity: 0.8 }}
+      pressedFunction={onEditPress}
+    >
+      <Text style={styles.buttonText}>Edit</Text>
+    </MyPressable>
+  </View>
+)}
+
       </View>
     </View>
   );
