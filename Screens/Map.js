@@ -3,18 +3,31 @@ import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import MyPressable from "../components/MyPressable";
 import { DefaultLocation } from "../helper";
+import GooglePlacesInput from "../components/AddressInput";
 
 export default function Map({ navigation, route }) {
     const [selectedLocation, setSelectedLocation] = useState(null);
-
+    const [locationFromAddres, setLocationFromAddress] = useState();
     useEffect(() => {
         if (route.params.currentLocation) {
             setSelectedLocation(route.params.currentLocation);
         }
     }, [route]);
 
+    //pass the location from API to selectedLocation
+    useEffect(() => {
+        if (locationFromAddres) {
+            setSelectedLocation({
+                latitude: locationFromAddres.lat,
+                longitude: locationFromAddres.lng
+            });
+        }
+      }, [locationFromAddres]);
     return (
         <>
+        <GooglePlacesInput 
+            setLocationFromAddress={setLocationFromAddress}
+        />
             <MapView
                 onPress={(event) => {
                     setSelectedLocation({
