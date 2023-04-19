@@ -3,6 +3,29 @@
 - [Iteration 2](#iteration-2) - [Contribution:](#contribution) - [Screenshots:](#screenshots)
 - [Iteration 1](#iteration-1) - [Contribution:](#contribution-1) - [Screenshots:](#screenshots-1)
 
+# Iteration 3
+
+#### Contribution:
+
+- Aly 
+    * Fixed edit access
+    * Made mapview following the marker on new location selected in map
+    * Sorting Entry list by order
+    * Overhauled all UI design
+- Difei
+    * Fixed edit acccess
+    * Added AddressInput to autocomplete address input using geocoding
+    * Added reverse geocoding in LocationManager
+    * Added locations collection to store geoinfo
+    * Removed buttons for users with no access
+    * Updated user profile related info, adding user collections to include join dates and names and added them in detail page
+- Zia
+    * Fixed image issue when the map location was being changed
+    * Added scheduled notification
+    * Made map and image required field when adding a post
+    * Made pictures shown on details page from the storage
+
+
 # Iteration 2
 
 #### Contribution:
