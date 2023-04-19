@@ -9,9 +9,17 @@ export const COLORS = {
     CYAN2: "#a1bbc4",
 };
 
+export const COLORS2 = {
+    PRIMARY: "#329f69",
+    SECONDARY: "#fff",
+    TERTIARY: "#5499C7",
+    NEUTRAL: "#f8f9fa"
+};
+
+
 export const ScreenContainer = {
     flex: 1,
-    backgroundColor: COLORS.CYAN2,
+    backgroundColor: COLORS.WHITE,
     justifyContent: "flex-start",
     alignItems: "center",
 };
