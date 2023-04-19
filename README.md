@@ -18,7 +18,7 @@
 - Aly 
     * Fixed edit access
     * Made mapview following the marker on new location selected in map
-    * Sorting Entry list by order
+    * Sorted Entry list by order
     * Overhauled all UI design
 - Difei
     * Fixed edit acccess
