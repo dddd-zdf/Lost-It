@@ -7,7 +7,7 @@ import GooglePlacesInput from "../components/AddressInput";
 
 export default function Map({ navigation, route }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [locationFromAddres, setLocationFromAddress] = useState();
+  const [locationFromAddress, setLocationFromAddress] = useState();
   useEffect(() => {
     if (route.params.currentLocation) {
       setSelectedLocation(route.params.currentLocation);
@@ -16,13 +16,13 @@ export default function Map({ navigation, route }) {
 
   //pass the location from API to selectedLocation
   useEffect(() => {
-    if (locationFromAddres) {
+    if (locationFromAddress) {
       setSelectedLocation({
-        latitude: locationFromAddres.lat,
-        longitude: locationFromAddres.lng,
+        latitude: locationFromAddress.lat,
+        longitude: locationFromAddress.lng,
       });
     }
-  }, [locationFromAddres]);
+  }, [locationFromAddress]);
   return (
     <>
       <GooglePlacesInput setLocationFromAddress={setLocationFromAddress} />
