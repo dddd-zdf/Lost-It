@@ -16,7 +16,7 @@ export default function EntryItem({ entry, onPress }) {
         style={styles.poster}
         source={require("../assets/bg.png")}
       >
-        <View style={{paddingTop: 100, alignItems: "center"}}>
+        <View style={{ paddingTop: 100, alignItems: "center" }}>
           <View style={styles.labelContainer}>
             {/* <Text style={styles.text}>Title: </Text> */}
             <Text style={styles.titleText}>{entry.title}</Text>
@@ -26,8 +26,12 @@ export default function EntryItem({ entry, onPress }) {
             <Text style={styles.text}>{entry.description}</Text>
           </View>
           <View style={styles.labelContainer}>
-            <Text style={styles.text}>Description: </Text>
-            <Text style={styles.text}>{entry.description}</Text>
+            <Text style={styles.text}>Uploader: </Text>
+            <Text style={styles.text}>{entry.uploader}</Text>
+          </View>
+          <View style={styles.labelContainer}>
+            <Text style={styles.text}>Time posted: </Text>
+            <Text style={styles.text}>{entry.date ? entry.date : ""}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -59,8 +63,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   text: {
-    color: COLORS.GOLD,
-    fontSize: 15,
+    color: COLORS.BLACK,
+    fontSize: 10,
     fontWeight: "bold",
   },
   labelContainer: {

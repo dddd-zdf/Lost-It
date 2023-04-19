@@ -54,6 +54,7 @@ export default function Add({ navigation }) {
         uploader: user.displayName,
         uploaderEmail: user.email,
         address: address,
+        date: new Date().toString(),
       };
 
       // add to db
