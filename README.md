@@ -1,11 +1,19 @@
 ## Links
+- [Iteration 3](#iteration-3) 
+    - [Contribution](#contribution-3) 
+    - [Screenshots](#screenshots-3)
+    
+- [Iteration 2](#iteration-2) 
+    - [Contribution](#contribution-2) 
+    - [Screenshots](#screenshots-2)
+    
+- [Iteration 1](#iteration-1) 
+    - [Contribution](#contribution-1) 
 
-- [Iteration 2](#iteration-2) - [Contribution:](#contribution) - [Screenshots:](#screenshots)
-- [Iteration 1](#iteration-1) - [Contribution:](#contribution-1) - [Screenshots:](#screenshots-1)
 
-# Iteration 3
+# Iteration 3 <a name="iteration-3"></a>
 
-#### Contribution:
+#### Contribution 3:
 
 - Aly 
     * Fixed edit access
@@ -25,10 +33,12 @@
     * Made map and image required field when adding a post
     * Made pictures shown on details page from the storage
 
+#### Screenshots 3:
+
 
 # Iteration 2
 
-#### Contribution:
+#### Contribution 2:
 
 - Difei - Implemented Authentication functionality. Created a Login page a Signup page, and added Firebase Authentication to allow the app to include users. Added proper authorization checks and filters that connect to a particular user in Add, Edit, MyList and Details screens.
 - Zia - Implemented Camera functionality - Created ImageManager component that handles camera requests/verification, added preview for the image on the add screen. Created Firebase Storage, saved the images in the firebase storage.
@@ -40,7 +50,7 @@
 - Camera Functionality : fetching images from storage and displaying them in Entry Details screen not implemented yet, to be completed in Iteration 3.
 - Camera Functionality : Taking a picture is not working on Android due to an apparently abundant issue discussed online. This was consulted with the TA and is being sorted for the time being. Should be fixed by Iteration 3.
 
-#### Screenshots:
+#### Screenshots 2:
 
 1. Login
 <pre> <img src="./Screenshots/Login.PNG" width="180"/> </pre>
@@ -62,7 +72,7 @@
 
 # Iteration 1
 
-#### Contribution:
+#### Contribution 1:
 
 - Difei - Implemented Navigation functionality
 - Zia & Aly - Implemented CRUD operations
