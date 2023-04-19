@@ -13,7 +13,13 @@ import MyPressable from "../components/MyPressable";
 import React, { useState } from "react";
 import { auth } from "../Firebase/firebase-setup";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { COLORS, COLORS2, ScreenContainer, DefaultLocation } from "../helper";
+import {
+  COLORS,
+  COLORS2,
+  ScreenContainer,
+  inputContainer,
+  loginContainer,
+} from "../helper";
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +53,7 @@ export default function Login({ navigation }) {
 
         <View style={styles.middleContainer}>
           <TextInput
-            style={styles.inputContainer}
+            style={inputContainer}
             value={email}
             onChangeText={(newEmail) => {
               setEmail(newEmail);
@@ -55,7 +61,7 @@ export default function Login({ navigation }) {
             placeholder="Email"
           />
           <TextInput
-            style={styles.inputContainer}
+            style={inputContainer}
             secureTextEntry={true}
             value={password}
             onChangeText={(newPassword) => {
@@ -69,24 +75,26 @@ export default function Login({ navigation }) {
           <MyPressable
             pressedFunction={loginHandler}
             pressedStyle={{ opacity: 0.8 }}
-            customStyle={styles.loginContainer}
+            customStyle={loginContainer}
           >
-            <Text style={{ color: COLORS.WHITE, fontSize: 20, fontWeight: "bold", }}>Login</Text>
+            <Text
+              style={{ color: COLORS.WHITE, fontSize: 20, fontWeight: "bold" }}
+            >
+              Login
+            </Text>
           </MyPressable>
 
-
-          <Text style={{fontSize: 16}}>New User? </Text>
+          <Text style={{ fontSize: 16 }}>New User? </Text>
           <MyPressable
             pressedFunction={signupHandler}
             pressedStyle={{ opacity: 0.8 }}
-            customStyle={{marginTop: 10}}
+            customStyle={{ marginTop: 10 }}
           >
-            <Text style={{color: COLORS.CYAN, fontSize: 16}}>Create an Account</Text>
+            <Text style={{ color: COLORS.CYAN, fontSize: 16 }}>
+              Create an Account
+            </Text>
           </MyPressable>
         </View>
-
-        {/* <Button title="Login" onPress={loginHandler} />
-      <Button title="New User? Create an Account" onPress={signupHandler} /> */}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -107,37 +115,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
-  },
-  inputContainer: {
-    borderWidth: 0.5,
-    padding: 8,
-    borderRadius: 10,
-    width: "90%",
-    fontSize: 18,
-    color: COLORS.BLACK,
-    fontWeight: "500",
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  loginContainer: {
-    width: "60%",
-    alignItems: "center",
-    borderRadius: 10,
-    // borderWidth: 2,
-    backgroundColor: COLORS2.PRIMARY,
-    padding: 8,
-    marginBottom: 20
-  },
-  utilitiesButtons: {
-    // flex: 1,
-    width: 130,
-    height: 130,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 25,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-    paddingHorizontal: 3,
   },
 });
