@@ -99,7 +99,7 @@ export async function writeLocationToDB(location, address) {
         const id = `${location.latitude},${location.longitude}`;
         const locationsRef = await setDoc(doc(firestore, 'locations', id), {
             latitude: location.latitude,
-            longitude: location.latitude,
+            longitude: location.longitude,
             address: address,
         })
         console.log(id);
