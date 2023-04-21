@@ -6,9 +6,16 @@ import {
   Keyboard,
   Image,
   TouchableHighlight,
+  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { COLORS, ScreenContainer } from "../helper";
+import {
+  COLORS,
+  ScreenContainer,
+  COLORS2,
+  windowWidth,
+  addPagePressable,
+} from "../helper";
 import MyInput from "../components/MyInput";
 import MyPressable from "../components/MyPressable";
 import { UpdateDB } from "../Firebase/firestore-helper";
@@ -18,7 +25,7 @@ import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 
 export default function Edit({ route, navigation }) {
-  const { title, description, location, imageURL, address} = route.params;
+  const { title, description, location, imageURL, address } = route.params;
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedLocation, setUpdatedLocation] = useState(location);
@@ -35,7 +42,7 @@ export default function Edit({ route, navigation }) {
     setUserId(route.params.userId);
     setKey(route.params.key);
   }, []);
-  
+
   function cancel() {
     return navigation.goBack();
   }
@@ -57,7 +64,14 @@ export default function Edit({ route, navigation }) {
     setImageUri(uri);
   };
 
-  async function onSubmit(updatedTitle, updatedDescription, updatedLocation, updatedAddress, uploader, uploaderEmail) {
+  async function onSubmit(
+    updatedTitle,
+    updatedDescription,
+    updatedLocation,
+    updatedAddress,
+    uploader,
+    uploaderEmail
+  ) {
     let imageUriStorage = "";
     imageUriStorage = await fetchImage(imageUri);
     UpdateDB(
@@ -78,14 +92,19 @@ export default function Edit({ route, navigation }) {
       address: updatedAddress,
       uploader: uploader,
       uploaderEmail: uploaderEmail,
-      userId: userId
+      userId: userId,
     };
     return navigation.navigate("Item Details", entry);
   }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={[ScreenContainer, { paddingTop: 50 }]}>
+      <ScrollView
+        contentContainerStyle={[
+          ScreenContainer,
+          { paddingTop: 50, flexGrow: 1 },
+        ]}
+      >
         <MyInput
           inputName={"Title"}
           value={updatedTitle}
@@ -98,32 +117,43 @@ export default function Edit({ route, navigation }) {
           customStyle={{ height: 100 }}
         />
 
-        <Text>{updatedAddress ? updatedAddress : address}</Text>
+        <LocationManager
+          location={updatedLocation ? updatedLocation : location}
+          address={updatedAddress ? updatedAddress : address}
+          setLocation={setUpdatedLocation}
+          setAddress={setUpdatedAddress}
+          customPressableStyle={styles.mapButton}
+          returnScreen={"Edit Item"}
+        />
 
-        <View style={styles.utilitiesContainer}>
-          <ImageManager
-            imageUriHandler={imageUriHandler}
-            customPressableStyle={styles.utilitiesButtons}
-            imageURI={imageUri}
-          />
+        <View style={styles.addressContainer}>
+          <Text style={{ fontWeight: 500, marginBottom: 15 }}>
+            {updatedAddress ? updatedAddress : address}
+          </Text>
+        </View>
 
-          <LocationManager
-            location={updatedLocation ? updatedLocation : location}
-            address={updatedAddress ? updatedAddress : address}
-            setLocation={setUpdatedLocation}
-            setAddress={setUpdatedAddress}
-            customPressableStyle={styles.utilitiesButtons}
-            returnScreen={"Edit Item"}
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: imageUri }}
+            style={{
+              flex: 1,
+            }}
           />
         </View>
+
+        <ImageManager
+          imageUriHandler={imageUriHandler}
+          customPressableStyle={styles.imageButtons}
+          imageURI={imageUri}
+        ></ImageManager>
 
         <View style={styles.pressablesContainer}>
           <MyPressable
             pressedFunction={() => cancel()}
-            customStyle={styles.pressable}
+            customStyle={styles.pressableReset}
             pressedStyle={{ opacity: 0.8 }}
           >
-            <Text style={styles.text}>Cancel</Text>
+            <Text style={styles.text}>Cancel 2</Text>
           </MyPressable>
           <MyPressable
             pressedFunction={() =>
@@ -136,27 +166,27 @@ export default function Edit({ route, navigation }) {
                 uploaderEmail
               )
             }
-            customStyle={styles.pressable}
+            customStyle={addPagePressable}
             pressedStyle={{ opacity: 0.5 }}
           >
-            <Text style={styles.text}>Submit</Text>
+            <Text style={styles.text}>Confirm</Text>
           </MyPressable>
         </View>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  pressablesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: 260,
-    height: 40,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // pressablesContainer: {
+  //   flexDirection: "row",
+  //   marginTop: 25,
+  //   width: 260,
+  //   height: 40,
+  //   borderColor: "black",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
   pressable: {
     flex: 1,
     alignItems: "center",
@@ -191,5 +221,63 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: COLORS.BLUE,
     paddingHorizontal: 3,
+  },
+  pressablesContainer: {
+    flexDirection: "row",
+    marginVertical: 25,
+    width: 0.8 * windowWidth,
+    height: 40,
+    borderColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pressableReset: {
+    ...addPagePressable,
+    backgroundColor: "#FFA24B",
+  },
+  text: {
+    fontSize: 13,
+    color: COLORS.WHITE,
+    fontWeight: "500",
+  },
+  utilitiesContainer: {
+    flexDirection: "row",
+    marginTop: 25,
+    width: "90%",
+    height: 200,
+    borderColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 10,
+  },
+  mapButton: {
+    width: 0.8 * windowWidth,
+    height: 0.8 * windowWidth,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    backgroundColor: COLORS.GRAY,
+    paddingHorizontal: 3,
+    marginVertical: 15,
+  },
+  imageButtons: {
+    width: 0.8 * windowWidth,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 7,
+    borderRadius: 5,
+    backgroundColor: COLORS2.PRIMARY,
+    paddingHorizontal: 3,
+    // marginTop: 25,
+  },
+  imageContainer: {
+    width: 0.8 * windowWidth,
+    height: 0.8 * windowWidth,
+    marginBottom: 25,
+  },
+  addressContainer: {
+    width: 0.8 * windowWidth,
+    alignItems: "center",
+    marginVertical: 10,
   },
 });

@@ -51,7 +51,7 @@ export default function ImageManager({
         customStyle={customPressableStyle}
         pressedStyle={{ opacity: 0.5 }}
       >
-        <Text style={{ color: "white" }}>Take a picture</Text>
+        <Text style={{ color: "white" }}>{imageURI ? "Retake picture" : "Take a picture"}</Text>
       </MyPressable>
     </>
   );

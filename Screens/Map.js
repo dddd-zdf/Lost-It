@@ -68,7 +68,6 @@ export default function Map({ navigation, route }) {
 
       <MyPressable
         isDisabled={!selectedLocation}
-        title="Confirm selected location"
         customStyle={styles.confirmButton}
         pressedStyle={{ opacity: 0.5 }}
         pressedFunction={() =>
@@ -77,7 +76,7 @@ export default function Map({ navigation, route }) {
           })
         }
       >
-        <Text> Confirm selected location </Text>
+        <Text style={{fontWeight: 500}}> Confirm selected location </Text>
       </MyPressable>
     </>
   );
