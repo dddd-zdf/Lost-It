@@ -6,10 +6,20 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
+  Dimensions,
+  Image,
 } from "react-native";
 import MyInput from "../components/MyInput";
 import LocationManager from "../components/LocationManager";
-import { COLORS, ScreenContainer, DefaultLocation } from "../helper";
+import {
+  COLORS,
+  ScreenContainer,
+  DefaultLocation,
+  windowWidth,
+  COLORS2,
+  addPagePressable,
+} from "../helper";
 import MyPressable from "../components/MyPressable";
 import { writeToDB } from "../Firebase/firestore-helper";
 import ImageManager from "../components/ImageManager";
@@ -83,56 +93,81 @@ export default function Add({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={[ScreenContainer, { paddingTop: 50 }]}>
+      <ScrollView
+        contentContainerStyle={[
+          ScreenContainer,
+          { paddingTop: 50, flexGrow: 1 },
+        ]}
+      >
         <MyInput
-          inputName={"Title"}
+          placeholder={"Title"}
           value={title}
           textUpdateFunction={setTitle}
         />
         <MyInput
-          inputName={"Description"}
+          placeholder={"Description"}
           value={description}
           textUpdateFunction={setDescription}
           customStyle={{ height: 100 }}
         />
 
-        <View>
-          <Text>{address}</Text>
+        <LocationManager
+          location={location}
+          setLocation={setLocation}
+          setAddress={setAddress}
+          customPressableStyle={styles.mapButton}
+          returnScreen={"Post"}
+        />
+
+        <View style={styles.addressContainer}>
+          {address && (
+            <Text style={{ fontWeight: 500, marginBottom: 15 }}>
+              {address}
+            </Text>
+          )}
         </View>
 
-        <View style={styles.utilitiesContainer}>
-          <ImageManager
-            imageUriHandler={imageUriHandler}
-            customPressableStyle={styles.utilitiesButtons}
-            imageURI={imageUri}
-          />
-          <LocationManager
-            location={location}
-            setLocation={setLocation}
-            setAddress={setAddress}
-            customPressableStyle={styles.utilitiesButtons}
-            returnScreen={"Post"}
-          />
-        </View>
+        {imageUri && (
+          <View style={styles.imageContainer}>
+            <Image
+              source={{ uri: imageUri }}
+              style={{
+                flex: 1,
+              }}
+            />
+          </View>
+        )}
 
-        {/* <ImageManager /> */}
+        <ImageManager
+          imageUriHandler={imageUriHandler}
+          customPressableStyle={styles.imageButtons}
+          imageURI={imageUri}
+        ></ImageManager>
+        {/* <MyPressable
+            pressedFunction={() => onSubmit(title, description)}
+            customStyle={styles.pressable}
+            pressedStyle={{ opacity: 0.5 }}
+          >
+            <Text style={styles.text}>Submit</Text>
+          </MyPressable> */}
+
         <View style={styles.pressablesContainer}>
           <MyPressable
             pressedFunction={() => resetInputs()}
-            customStyle={styles.pressable}
+            customStyle={styles.pressableReset}
             pressedStyle={{ opacity: 0.8 }}
           >
             <Text style={styles.text}>Reset</Text>
           </MyPressable>
           <MyPressable
             pressedFunction={() => onSubmit(title, description)}
-            customStyle={styles.pressable}
+            customStyle={addPagePressable}
             pressedStyle={{ opacity: 0.5 }}
           >
             <Text style={styles.text}>Submit</Text>
           </MyPressable>
         </View>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 }
@@ -140,20 +175,16 @@ export default function Add({ navigation }) {
 const styles = StyleSheet.create({
   pressablesContainer: {
     flexDirection: "row",
-    marginTop: 25,
-    width: 260,
+    marginVertical: 25,
+    width: 0.8 * windowWidth,
     height: 40,
     borderColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },
-  pressable: {
-    flex: 1,
-    alignItems: "center",
-    marginHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
+  pressableReset: {
+    ...addPagePressable,
+    backgroundColor: "#FFA24B",
   },
   text: {
     fontSize: 13,
@@ -170,16 +201,34 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 10,
   },
-  utilitiesButtons: {
-    // flex: 1,
-    width: 130,
-    height: 130,
+  mapButton: {
+    width: 0.8 * windowWidth,
+    height: 0.8 * windowWidth,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: 25,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
+    borderRadius: 5,
+    backgroundColor: COLORS.GRAY,
     paddingHorizontal: 3,
+    marginVertical: 15,
+  },
+  imageButtons: {
+    width: 0.8 * windowWidth,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 7,
+    borderRadius: 5,
+    backgroundColor: COLORS2.PRIMARY,
+    paddingHorizontal: 3,
+    // marginTop: 25,
+  },
+  imageContainer: {
+    width: 0.8 * windowWidth,
+    height: 0.8 * windowWidth,
+    marginBottom: 25,
+  },
+  addressContainer: {
+    width: 0.8 * windowWidth,
+    alignItems: "center",
+    marginVertical: 10,
   },
 });

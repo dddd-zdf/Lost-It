@@ -12,7 +12,7 @@ export default function MyPressable({
         <Pressable
             onPress={pressedFunction}
             style={({ pressed }) => {
-                return [customStyle, pressed && pressedStyle];
+                return [(customStyle), pressed && pressedStyle];
             }}
             disabled = {!isDisabled ? false : true}
         >

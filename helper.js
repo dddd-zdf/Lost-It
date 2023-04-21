@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const COLORS = {
   BLUE: "#1A5276",
   WHITE: "#fff",
@@ -7,6 +9,8 @@ export const COLORS = {
   BLACK: "black",
   MAROON: "#800000",
   CYAN2: "#a1bbc4",
+  LIGHTGRAY: "#EBF2EE",
+  GRAY: "#dcdcdc",
 };
 
 export const COLORS2 = {
@@ -17,7 +21,7 @@ export const COLORS2 = {
 };
 
 export const ScreenContainer = {
-  flex: 1,
+  // flex: 1,
   backgroundColor: COLORS.WHITE,
   justifyContent: "flex-start",
   alignItems: "center",
@@ -49,3 +53,14 @@ export const loginContainer = {
   padding: 8,
   marginBottom: 20,
 };
+
+export const addPagePressable = {
+  flex: 1,
+  alignItems: "center",
+  marginHorizontal: 10,
+  paddingVertical: 7,
+  borderRadius: 3,
+  backgroundColor: COLORS2.PRIMARY,
+};
+
+export const windowWidth = Dimensions.get("window").width;

@@ -10,6 +10,12 @@ import {
   getAddressFromDB,
   writeLocationToDB,
 } from "../Firebase/firestore-helper";
+import {
+  COLORS,
+  ScreenContainer,
+  DefaultLocation,
+  windowWidth,
+} from "../helper";
 
 //round coordinate decimals to avoid unneccesary duplicates
 const rounding = 4;
@@ -133,7 +139,7 @@ export default function LocationManager({
           }}
         />
       ) : (
-        <Text style={{ color: "white" }}>Pick location on map</Text>
+        <Text style={{color: COLORS.BLACK, fontWeight: 300, }}>Pick location on map</Text>
       )}
     </MyPressable>
   );

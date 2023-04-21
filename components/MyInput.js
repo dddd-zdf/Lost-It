@@ -3,57 +3,51 @@ import { COLORS } from "../helper";
 import React from "react";
 
 export default function MyInput({
-    inputName,
-    value,
-    textUpdateFunction,
-    customStyle,
+  value,
+  textUpdateFunction,
+  customStyle,
+  placeholder,
 }) {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{inputName}</Text>
-            <View>
-                <TextInput
-                    multiline={true}
-                    style={[styles.input, customStyle]}
-                    value={value}
-                    onChangeText={(newText) => {
-                        textUpdateFunction(newText);
-                    }}
-                />
-            </View>
-        </View>
-    );
+  return (
+      <TextInput
+        multiline={true}
+        placeholder={placeholder}
+        style={[styles.input, customStyle]}
+        value={value}
+        onChangeText={(newText) => {
+          textUpdateFunction(newText);
+        }}
+      />
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        marginBottom: 5,
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        borderColor: "black",
-        width: 360,
-        paddingHorizontal: 5,
-        paddingVertical: 5,
-    },
-    text: {
-        fontSize: 17,
-        fontWeight: "bold",
-        color: COLORS.BLUE,
-        paddingLeft: 10,
-    },
-    input: {
-        backgroundColor: COLORS.LIGHTBLUE,
-        width: 220,
-        fontWeight: "bold",
-        padding: 7,
-        color: COLORS.BLUE,
-        borderColor: COLORS.GOLD,
-        fontSize: 17,
-        marginBottom: 0,
-        marginHorizontal: 5,
-        textAlignVertical: "top",
-        textAlign: "left",
-        borderRadius: 5,
-    },
+  container: {
+    // flexDirection: "column",
+    // marginBottom: 10,
+    // justifyContent: "center",
+    // alignItems: "flex-start",
+    // borderColor: "black",
+    // width: "100%",
+    // paddingHorizontal: 5,
+    // paddingVertical: 5,
+  },
+  text: {
+    fontSize: 17,
+    fontWeight: "bold",
+    color: COLORS.BLUE,
+    paddingLeft: 10,
+  },
+  input: {
+    backgroundColor: COLORS.GRAY,
+    width: "80%",
+    fontWeight: "bold",
+    padding: 7,
+    color: COLORS.BLACK,
+    fontSize: 17,
+    marginBottom: 15,
+    textAlignVertical: "top",
+    textAlign: "left",
+    borderRadius: 5,
+  },
 });
