@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert, Image } from "react-native";
+import { View, Text, StyleSheet, Alert, Image, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 import { COLORS, ScreenContainer } from "../helper";
 import MyPressable from "../components/MyPressable";
@@ -59,6 +59,10 @@ export default function Detail({ route, navigation }) {
 
   return (
     <View style={[ScreenContainer, { paddingTop: 70 }]}>
+       <ImageBackground
+        style={styles.poster}
+        source={require("../assets/bg.png")}
+      >
       <View style={styles.container}>
         <Text style={styles.text}>{`Title:  ${title}`}</Text>
         <Text style={styles.text}>{`User:  ${uploader}`}</Text>
@@ -110,18 +114,21 @@ export default function Detail({ route, navigation }) {
 )}
 
       </View>
+     </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.LIGHTBLUE,
+    // backgroundColor: COLORS.LIGHTBLUE,
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
     width: 350,
-    paddingVertical: 15,
+    paddingTop: 150,
+    paddingBottom: 50,
+    paddingHorizontal: 50,
     borderRadius: 5,
     shadowColor: COLORS.BLACK,
     shadowRadius: 10,
