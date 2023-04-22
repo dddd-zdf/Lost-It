@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     color: COLORS.WHITE,
   },
   utilitiesContainer: {
-    flexDirection: "column",
+    flexDirection: "row",
     marginTop: 25,
     width: "90%",
     height: 200,
