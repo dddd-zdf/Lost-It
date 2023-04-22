@@ -35,6 +35,31 @@
 
 #### Screenshots 3:
 
+1. Login
+<pre> <img src="./Screenshots/iteration3/Login.PNG" width="180"/> </pre>
+
+2. Signup
+<pre> <img src="./Screenshots/iteration3/Signup.PNG" width="180"/> </pre>
+
+3. Home - home screen shows all posts/lost items from a user's community
+<pre> <img src="./Screenshots/iteration3/Home.PNG" width="180"/> </pre>
+
+4. Post
+<pre> <img src="./Screenshots/iteration3/addpost.PNG" width="180"/> <img src="./Screenshots/iteration3/mapview.PNG" width="180"/> <img src="./Screenshots/iteration3/camera.PNG" width="180"/> </pre>
+
+5. Detail
+<pre> <img src="./Screenshots/iteration3/detail.PNG" width="180"/> </pre>
+
+6. Edit
+<pre> <img src="./Screenshots/iteration3/edit1.PNG" width="180"/> <img src="./Screenshots/iteration3/edit2.PNG" width="180"/> </pre>
+
+7. Profile
+<pre> <img src="./Screenshots/iteration3/profile.PNG" width="180"/> </pre>
+
+8. Scheduled Notification - to set up a daily reminder
+<pre> <img src="./Screenshots/iteration3/notification.PNG" width="180"/> </pre>
+
+
 
 # Iteration 2
 
