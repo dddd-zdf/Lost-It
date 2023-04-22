@@ -49,22 +49,25 @@
 2. Signup
 <pre> <img src="./Screenshots/iteration3/Signup.png" width="180"/> </pre>
 
-3. Home - home screen shows all posts/lost items from a user's community
+3. Home - showing all posts/lost items from a user's community
 <pre> <img src="./Screenshots/iteration3/Home.png" width="180"/> </pre>
 
 4. Post
 <pre> <img src="./Screenshots/iteration3/addpost.PNG" width="180"/> <img src="./Screenshots/iteration3/mapview.PNG" width="180"/> <img src="./Screenshots/iteration3/camera.PNG" width="180"/> </pre>
 
-5. Detail
+5. MyList - showing only the user's own posts
+<pre> <img src="./Screenshots/iteration3/mylist.PNG" width="180"/> </pre>
+
+6. ItemDetails - clicking on a post in Home or MyList will route to this page, showing all details of said post/item.
 <pre> <img src="./Screenshots/iteration3/detail.PNG" width="180"/> </pre>
 
-6. Edit
+7. Edit
 <pre> <img src="./Screenshots/iteration3/edit1.PNG" width="180"/> <img src="./Screenshots/iteration3/edit2.PNG" width="180"/> </pre>
 
-7. Profile
+8. Profile
 <pre> <img src="./Screenshots/iteration3/profile.PNG" width="180"/> </pre>
 
-8. Scheduled Notification - to set up a daily reminder
+9. Scheduled Notification - to set up a daily reminder
 <pre> <img src="./Screenshots/iteration3/notification.PNG" width="180"/> </pre>
 
 
