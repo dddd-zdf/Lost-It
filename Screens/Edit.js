@@ -153,7 +153,7 @@ export default function Edit({ route, navigation }) {
             customStyle={styles.pressableReset}
             pressedStyle={{ opacity: 0.8 }}
           >
-            <Text style={styles.text}>Cancel 2</Text>
+            <Text style={styles.text}>Cancel</Text>
           </MyPressable>
           <MyPressable
             pressedFunction={() =>
