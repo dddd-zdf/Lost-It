@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Alert, Image, ImageBackground, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { COLORS, ScreenContainer,COLORS2, addPagePressable } from "../helper";
+import { COLORS, ScreenContainer,COLORS2, addPagePressable, DetailStyle } from "../helper";
 import MyPressable from "../components/MyPressable";
 import LocationManager from "../components/LocationManager";
 import { deleteFromDB } from "../Firebase/firestore-helper";
@@ -62,25 +62,25 @@ export default function Detail({ route, navigation }) {
     <View style={[ScreenContainer, { paddingTop: 40 }]}>
      
        <ImageBackground
-        style={styles.poster}
+        style={DetailStyle.poster}
         source={require("../assets/plainBG.png")}
       >
-      <View style={styles.container}>
-        <Text style={styles.text}>{`Title:  ${title}`}</Text>
-        <Text style={styles.text}>{`User:  ${uploader}`}</Text>
-        <Text style={styles.text}>{`Contact:  ${uploaderEmail}`}</Text>
-        <Text style={styles.text}>{`Description:  ${description}`}</Text>
-        <Text style={styles.text}>{`Address:  ${address}`}</Text>
+      <View style={DetailStyle.container}>
+        <Text style={DetailStyle.text}>{`Title:  ${title}`}</Text>
+        <Text style={DetailStyle.text}>{`User:  ${uploader}`}</Text>
+        <Text style={DetailStyle.text}>{`Contact:  ${uploaderEmail}`}</Text>
+        <Text style={DetailStyle.text}>{`Description:  ${description}`}</Text>
+        <Text style={DetailStyle.text}>{`Address:  ${address}`}</Text>
 
-        <View style={styles.utilitiesContainer}>
+        <View style={DetailStyle.utilitiesContainer}>
           {imageURL && (
             <Image
               source={{
                 uri: imageURL,
               }}
               style={{
-                width: styles.utilitiesButtons.width,
-                height: styles.utilitiesButtons.height,
+                width: DetailStyle.utilitiesButtons.width,
+                height: DetailStyle.utilitiesButtons.height,
               }}
             />
           )}
@@ -89,20 +89,20 @@ export default function Detail({ route, navigation }) {
               uri: `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:L%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`,
             }}
             style={{
-              width: styles.utilitiesButtons.width,
-              height: styles.utilitiesButtons.height,
+              width: DetailStyle.utilitiesButtons.width,
+              height: DetailStyle.utilitiesButtons.height,
             }}
           />
         </View>
 
         {userId === user.uid && (
-  <View style={styles.pressablesContainer}>
+  <View style={DetailStyle.pressablesContainer}>
     <MyPressable
-      customStyle={styles.pressableDelete}
+      customStyle={DetailStyle.pressableDelete}
       pressedStyle={{ opacity: 0.8 }}
       pressedFunction={onDeletePress}
     >
-      <Text style={styles.buttonText}>Delete</Text>
+      <Text style={DetailStyle.buttonText}>Delete</Text>
     </MyPressable>
 
     <MyPressable
@@ -110,7 +110,7 @@ export default function Detail({ route, navigation }) {
       pressedStyle={{ opacity: 0.8 }}
       pressedFunction={onEditPress}
     >
-      <Text style={styles.buttonText}>Edit</Text>
+      <Text style={DetailStyle.buttonText}>Edit</Text>
     </MyPressable>
   </View>
 )}
@@ -121,66 +121,3 @@ export default function Detail({ route, navigation }) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: COLORS.LIGHTBLUE,
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    width: 350,
-    paddingVertical: 50,
-    paddingHorizontal: 50,
-    borderRadius: 5,
-    // shadowColor: COLORS.BLACK,
-    // shadowRadius: 10,
-    // shadowOpacity: 0.3,
-    // elevation: 15,
-    // shadowOffset: { width: 0, height: 0 },
-  },
-  pressablesContainer: {
-    flexDirection: "row",
-    marginTop: 10,
-    width: 260,
-    height: 50,
-    borderColor: "black",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pressableDelete: {
-    ...addPagePressable,
-    backgroundColor: "red",
-    
-  },
-  text: {
-    fontSize: 15,
-    marginVertical: 3,
-    fontWeight: "bold",
-    color: COLORS.BLACK,
-  },
-  buttonText: {
-    color: COLORS.WHITE,
-  },
-  utilitiesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: "90%",
-    height: 200,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 0,
-  },
-  utilitiesButtons: {
-    // flex: 1,
-    width: 130,
-    height: 130,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.GOLD,
-    paddingHorizontal: 3,
-  },
-});

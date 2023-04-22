@@ -2,7 +2,7 @@ import { View, Text, Button, Alert, StyleSheet } from "react-native";
 import React from "react";
 import * as Notifications from "expo-notifications";
 import MyPressable from "./MyPressable";
-import { addPagePressable, COLORS2, COLORS } from "../helper";
+import { addPagePressable, COLORS2, COLORS, NotificationManagerStyle } from "../helper";
 
 export async function verifyPermission() {
   const permissionResponse = await Notifications.getPermissionsAsync();
@@ -39,22 +39,10 @@ export default function NotificationManager() {
   return (
     <MyPressable
       pressedFunction={scheduleNotificationHandler}
-      customStyle={styles.notificationPressable}
+      customStyle={NotificationManagerStyle.notificationPressable}
       pressedStyle={{ opacity: 0.5 }}
     >
       <Text style={{color:COLORS.WHITE}}>Get a reminder to check the app once daily?</Text>
     </MyPressable>
   );
 }
-
-const styles = StyleSheet.create({
-  notificationPressable: {
-    alignItems: "center",
-    marginHorizontal: 10,
-    padding: 10,
-    borderRadius: 3,
-    backgroundColor: COLORS2.PRIMARY,
-    marginBottom: 20,
-    marginTop: 20
-  },
-});

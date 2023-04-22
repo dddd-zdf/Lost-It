@@ -19,6 +19,7 @@ import {
   ScreenContainer,
   inputContainer,
   loginContainer,
+  signupStyle
 } from "../helper";
 
 export default function Signup({ navigation }) {
@@ -70,7 +71,7 @@ export default function Signup({ navigation }) {
           paddingTop: 80,
         }}
       >
-        <View style={styles.topContainer}>
+        <View style={signupStyle.topContainer}>
           <TextInput
             value={name}
             onChangeText={(newName) => {
@@ -110,7 +111,7 @@ export default function Signup({ navigation }) {
           />
         </View>
 
-        <View style={styles.bottomContainer}>
+        <View style={signupStyle.bottomContainer}>
           <MyPressable
             pressedFunction={signupHandler}
             pressedStyle={{ opacity: 0.8 }}
@@ -135,18 +136,3 @@ export default function Signup({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  topContainer: {
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bottomContainer: {
-    // backgroundColor: "yellow",
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-});

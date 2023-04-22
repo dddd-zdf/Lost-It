@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import MyPressable from "../components/MyPressable";
-import { DefaultLocation } from "../helper";
+import { DefaultLocation, mapStyle } from "../helper";
 import GooglePlacesInput from "../components/AddressInput";
 
 export default function Map({ navigation, route }) {
@@ -33,7 +33,7 @@ export default function Map({ navigation, route }) {
             longitude: event.nativeEvent.coordinate.longitude,
           });
         }}
-        style={styles.container}
+        style={mapStyle.container}
         provider="google"
         initialRegion={{
           latitude: route.params.currentLocation
@@ -68,7 +68,7 @@ export default function Map({ navigation, route }) {
 
       <MyPressable
         isDisabled={!selectedLocation}
-        customStyle={styles.confirmButton}
+        customStyle={mapStyle.confirmButton}
         pressedStyle={{ opacity: 0.5 }}
         pressedFunction={() =>
           navigation.navigate(route.params.returnScreen, {
@@ -81,26 +81,3 @@ export default function Map({ navigation, route }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: "red",
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-  confirmButton: {
-    position: "absolute",
-    width: 180,
-    bottom: 63,
-    right: 0,
-    left: 100,
-    alignItems: "center",
-    height: 40,
-    // marginBottom: 40,
-    backgroundColor: "white",
-    opacity: 0.7,
-    textAlign: "center",
-    paddingTop: 10,
-  },
-});

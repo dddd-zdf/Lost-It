@@ -3,24 +3,11 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { MAPS_API_KEY } from "@env";
 import Geocoder from "react-native-geocoding";
 import { View } from "react-native";
+import { GooglePlacesInputStyles } from "../helper";
 
 const GooglePlacesInput = ({ setLocationFromAddress }) => {
   return (
-    <View
-      style={{
-        position: "absolute",
-        marginTop: 25,
-        width: "95%",
-        borderRadius: 10,
-        zIndex: 1,
-        marginHorizontal: 10,
-        borderRadius: 10,
-        borderColor: "black",
-        shadowColor: "black",
-        shadowOpacity: 0.2,
-        shadowOffset: { width: 0, height: 0 },
-      }}
-    >
+    <View style={ GooglePlacesInputStyles }>
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={async (data, details = null) => {
@@ -46,21 +33,3 @@ const GooglePlacesInput = ({ setLocationFromAddress }) => {
 };
 
 export default GooglePlacesInput;
-
-{
-  /* <TextInput
-  style={{
-    borderRadius: 10,
-    margin: 10,
-    color: "#000",
-    borderColor: "#666",
-    backgroundColor: "#FFF",
-    borderWidth: 1,
-    height: 45,
-    paddingHorizontal: 10,
-    fontSize: 18,
-  }}
-  placeholder={"Search"}
-  placeholderTextColor={"#666"}
-/>; */
-}

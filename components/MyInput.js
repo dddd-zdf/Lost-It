@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import { COLORS } from "../helper";
+import { MyInputStyles } from "../helper";
 import React from "react";
 
 export default function MyInput({
@@ -12,7 +12,7 @@ export default function MyInput({
       <TextInput
         multiline={true}
         placeholder={placeholder}
-        style={[styles.input, customStyle]}
+        style={[MyInputStyles.input, customStyle]}
         value={value}
         maxLength={150}
         onChangeText={(newText) => {
@@ -21,34 +21,3 @@ export default function MyInput({
       />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flexDirection: "column",
-    // marginBottom: 10,
-    // justifyContent: "center",
-    // alignItems: "flex-start",
-    // borderColor: "black",
-    // width: "100%",
-    // paddingHorizontal: 5,
-    // paddingVertical: 5,
-  },
-  text: {
-    fontSize: 17,
-    fontWeight: "bold",
-    color: COLORS.BLUE,
-    paddingLeft: 10,
-  },
-  input: {
-    backgroundColor: COLORS.GRAY,
-    width: "80%",
-    fontWeight: "bold",
-    padding: 7,
-    color: COLORS.BLACK,
-    fontSize: 17,
-    marginBottom: 15,
-    textAlignVertical: "top",
-    textAlign: "left",
-    borderRadius: 5,
-  },
-});

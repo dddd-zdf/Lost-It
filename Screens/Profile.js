@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/firebase-setup";
 import { getUser } from "../Firebase/firestore-helper";
-import { COLORS, COLORS2, windowWidth, ScreenContainer } from "../helper";
+import { COLORS, COLORS2, windowWidth, ScreenContainer, profileStyle } from "../helper";
 import NotificationManager from "../components/NotificationManager";
 import { FontAwesome5 } from "@expo/vector-icons";
 import MyPressable from "../components/MyPressable";
@@ -39,19 +39,19 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={[ScreenContainer, { flex: 1 }]}>
-      <View style={styles.topContainer}>
+      <View style={profileStyle.topContainer}>
         <FontAwesome5 name="user-circle" size={100} color={COLORS2.PRIMARY} />
       </View>
 
-      <View style={styles.bottomContainer}>
-        <Text style={styles.textStyle}>Name: {displayName}</Text>
-        <Text style={styles.textStyle}>Email: {email}</Text>
-        <Text style={styles.textStyle}>Member since: {date}</Text>
+      <View style={profileStyle.bottomContainer}>
+        <Text style={profileStyle.textStyle}>Name: {displayName}</Text>
+        <Text style={profileStyle.textStyle}>Email: {email}</Text>
+        <Text style={profileStyle.textStyle}>Member since: {date}</Text>
         <NotificationManager />
 
         <MyPressable
           pressedFunction={handleSignOut}
-          customStyle={styles.signOutPressable}
+          customStyle={profileStyle.signOutPressable}
           pressedStyle={{ opacity: 0.5 }}
         >
           <Text style={{ color: COLORS.WHITE, fontWeight: "bold" }}>
@@ -62,31 +62,3 @@ export default function Profile({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  topContainer: {
-    alignItems: "center",
-    marginTop: 90,
-  },
-  textStyle: {
-    marginBottom: 15,
-    fontSize: 18,
-    fontWeight: "700",
-  },
-  bottomContainer: {
-    // backgroundColor: "yellow",
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-  signOutPressable: {
-    alignItems: "center",
-    marginHorizontal: 10,
-    padding: 10,
-    borderRadius: 3,
-    backgroundColor: "#FFA24B",
-    marginBottom: 20,
-    marginTop: 10,
-  },
-});

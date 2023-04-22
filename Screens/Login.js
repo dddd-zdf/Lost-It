@@ -19,6 +19,7 @@ import {
   ScreenContainer,
   inputContainer,
   loginContainer,
+  loginStyle
 } from "../helper";
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -44,14 +45,14 @@ export default function Login({ navigation }) {
           justifyContent: "flex-start",
         }}
       >
-        <View style={styles.topContainer}>
+        <View style={loginStyle.topContainer}>
           <Image
             source={require("../assets/logo.png")}
             style={{ height: 200, width: 200 }}
           />
         </View>
 
-        <View style={styles.middleContainer}>
+        <View style={loginStyle.middleContainer}>
           <TextInput
             style={inputContainer}
             value={email}
@@ -71,7 +72,7 @@ export default function Login({ navigation }) {
           />
         </View>
 
-        <View style={styles.bottomContainer}>
+        <View style={loginStyle.bottomContainer}>
           <MyPressable
             pressedFunction={loginHandler}
             pressedStyle={{ opacity: 0.8 }}
@@ -99,21 +100,3 @@ export default function Login({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  topContainer: {
-    alignItems: "center",
-  },
-  middleContainer: {
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bottomContainer: {
-    // backgroundColor: "yellow",
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-  },
-});

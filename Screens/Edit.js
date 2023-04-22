@@ -15,6 +15,7 @@ import {
   COLORS2,
   windowWidth,
   addPagePressable,
+  editStyle
 } from "../helper";
 import MyInput from "../components/MyInput";
 import MyPressable from "../components/MyPressable";
@@ -122,17 +123,17 @@ export default function Edit({ route, navigation }) {
           address={updatedAddress ? updatedAddress : address}
           setLocation={setUpdatedLocation}
           setAddress={setUpdatedAddress}
-          customPressableStyle={styles.mapButton}
+          customPressableStyle={editStyle.mapButton}
           returnScreen={"Edit Item"}
         />
 
-        <View style={styles.addressContainer}>
+        <View style={editStyle.addressContainer}>
           <Text style={{ fontWeight: 500, marginBottom: 15 }}>
             {updatedAddress ? updatedAddress : address}
           </Text>
         </View>
 
-        <View style={styles.imageContainer}>
+        <View style={editStyle.imageContainer}>
           <Image
             source={{ uri: imageUri }}
             style={{
@@ -143,17 +144,17 @@ export default function Edit({ route, navigation }) {
 
         <ImageManager
           imageUriHandler={imageUriHandler}
-          customPressableStyle={styles.imageButtons}
+          customPressableStyle={editStyle.imageButtons}
           imageURI={imageUri}
         ></ImageManager>
 
-        <View style={styles.pressablesContainer}>
+        <View style={editStyle.pressablesContainer}>
           <MyPressable
             pressedFunction={() => cancel()}
-            customStyle={styles.pressableReset}
+            customStyle={editStyle.pressableReset}
             pressedStyle={{ opacity: 0.8 }}
           >
-            <Text style={styles.text}>Cancel</Text>
+            <Text style={editStyle.text}>Cancel</Text>
           </MyPressable>
           <MyPressable
             pressedFunction={() =>
@@ -169,115 +170,10 @@ export default function Edit({ route, navigation }) {
             customStyle={addPagePressable}
             pressedStyle={{ opacity: 0.5 }}
           >
-            <Text style={styles.text}>Confirm</Text>
+            <Text style={editStyle.text}>Confirm</Text>
           </MyPressable>
         </View>
       </ScrollView>
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  // pressablesContainer: {
-  //   flexDirection: "row",
-  //   marginTop: 25,
-  //   width: 260,
-  //   height: 40,
-  //   borderColor: "black",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-  pressable: {
-    flex: 1,
-    alignItems: "center",
-    marginHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-  },
-  text: {
-    fontSize: 13,
-    color: COLORS.WHITE,
-    fontWeight: "500",
-  },
-  utilitiesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: "90%",
-    height: 200,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 10,
-  },
-  utilitiesButtons: {
-    // flex: 1,
-    width: 130,
-    height: 130,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 25,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-    paddingHorizontal: 3,
-  },
-  pressablesContainer: {
-    flexDirection: "row",
-    marginVertical: 25,
-    width: 0.8 * windowWidth,
-    height: 40,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  pressableReset: {
-    ...addPagePressable,
-    backgroundColor: "#FFA24B",
-  },
-  text: {
-    fontSize: 13,
-    color: COLORS.WHITE,
-    fontWeight: "500",
-  },
-  utilitiesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: "90%",
-    height: 200,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 10,
-  },
-  mapButton: {
-    width: 0.8 * windowWidth,
-    height: 0.8 * windowWidth,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-    backgroundColor: COLORS.GRAY,
-    paddingHorizontal: 3,
-    marginVertical: 15,
-  },
-  imageButtons: {
-    width: 0.8 * windowWidth,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 7,
-    borderRadius: 5,
-    backgroundColor: COLORS2.PRIMARY,
-    paddingHorizontal: 3,
-    // marginTop: 25,
-  },
-  imageContainer: {
-    width: 0.8 * windowWidth,
-    height: 0.8 * windowWidth,
-    marginBottom: 25,
-  },
-  addressContainer: {
-    width: 0.8 * windowWidth,
-    alignItems: "center",
-    marginVertical: 10,
-  },
-});
