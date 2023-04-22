@@ -84,7 +84,6 @@ export default function Map({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "red",
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
@@ -97,7 +96,6 @@ const styles = StyleSheet.create({
     left: 100,
     alignItems: "center",
     height: 40,
-    // marginBottom: 40,
     backgroundColor: "white",
     opacity: 0.7,
     textAlign: "center",

@@ -46,21 +46,3 @@ const GooglePlacesInput = ({ setLocationFromAddress }) => {
 };
 
 export default GooglePlacesInput;
-
-{
-  /* <TextInput
-  style={{
-    borderRadius: 10,
-    margin: 10,
-    color: "#000",
-    borderColor: "#666",
-    backgroundColor: "#FFF",
-    borderWidth: 1,
-    height: 45,
-    paddingHorizontal: 10,
-    fontSize: 18,
-  }}
-  placeholder={"Search"}
-  placeholderTextColor={"#666"}
-/>; */
-}

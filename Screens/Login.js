@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   bottomContainer: {
-    // backgroundColor: "yellow",
     borderColor: "black",
     alignItems: "center",
     justifyContent: "center",

@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 0.4,
     elevation: 10,
-    // shadowOffset: { width: -10, height: 10 },
     borderRadius: 10,
     padding: 10,
   },
@@ -69,12 +68,10 @@ const styles = StyleSheet.create({
   labelContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-  
     paddingHorizontal: 40,
-    // marginTop: 20,
     marginBottom: 20,
-    flexDirection: "column", 
-    alignItems: "center"
+    flexDirection: "column",
+    alignItems: "center",
   },
   poster: {
     width: "100%",

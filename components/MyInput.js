@@ -9,30 +9,20 @@ export default function MyInput({
   placeholder,
 }) {
   return (
-      <TextInput
-        multiline={true}
-        placeholder={placeholder}
-        style={[styles.input, customStyle]}
-        value={value}
-        maxLength={150}
-        onChangeText={(newText) => {
-          textUpdateFunction(newText);
-        }}
-      />
+    <TextInput
+      multiline={true}
+      placeholder={placeholder}
+      style={[styles.input, customStyle]}
+      value={value}
+      maxLength={150}
+      onChangeText={(newText) => {
+        textUpdateFunction(newText);
+      }}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // flexDirection: "column",
-    // marginBottom: 10,
-    // justifyContent: "center",
-    // alignItems: "flex-start",
-    // borderColor: "black",
-    // width: "100%",
-    // paddingHorizontal: 5,
-    // paddingVertical: 5,
-  },
   text: {
     fontSize: 17,
     fontWeight: "bold",
