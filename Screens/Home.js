@@ -53,7 +53,10 @@ export default function Home({ navigation, route }) {
 
   return (
     <View style={ScreenContainer}>
-      <EntriesList myEntries={entries} onEntryPress={onEntryPress} />
+      <EntriesList 
+        myEntries={entries} 
+        onEntryPress={onEntryPress}
+      />
     </View>
   );
 }

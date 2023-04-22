@@ -4,6 +4,15 @@ import EntryItem from "./EntryItem";
 
 export default function EntriesList({ myEntries, onEntryPress }) {
   const windowWidth = Dimensions.get("window").width;
+  if (myEntries.length === 0) {
+    return (
+      <View>
+        <Text>No post yet</Text>
+      </View>
+    );
+  }
+
+
   return (
     <FlatList
       data={myEntries}
