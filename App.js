@@ -36,9 +36,10 @@ function BottomTabs() {
                 component={Home}
                 initialParams={{ filter: "all" }}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <Entypo name="home" size={size} color={color} />
-                    ),
+                    ),  
                 }}
             />
             <Tab.Screen
@@ -46,6 +47,7 @@ function BottomTabs() {
                 component={Home}
                 initialParams={{ filter: "user" }}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <Entypo name="list" size={24} color={color} />
                     ),
@@ -55,6 +57,7 @@ function BottomTabs() {
                 name="Post"
                 component={Add}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="plus" size={size} color={color} />
                     ),
@@ -64,6 +67,7 @@ function BottomTabs() {
                 name="Profile"
                 component={Profile}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5
                             name="user-alt"
