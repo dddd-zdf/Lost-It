@@ -21,6 +21,7 @@ import { auth } from "./Firebase/firebase-setup";
 import * as Notifications from "expo-notifications";
 import { MAPS_API_KEY } from "@env";
 import Geocoder from 'react-native-geocoding';
+import { COLORS, ScreenContainer,COLORS2, addPagePressable } from "./helper";
 
 
 Geocoder.init(MAPS_API_KEY);
@@ -46,7 +47,7 @@ function BottomTabs() {
                 initialParams={{ filter: "user" }}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Entypo name="list" size={24} color="black" />
+                        <Entypo name="list" size={24} color={color} />
                     ),
                 }}
             />
@@ -146,7 +147,16 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator 
+            screenOptions={{
+                headerStyle: {
+                  backgroundColor: COLORS2.PRIMARY,
+                },
+                headerTintColor: "#eee",
+                headerTitleStyle: {
+                  fontSize: 20,
+                },
+              }}>
                 {isAuthenticated ? AppStack : AuthStack}
             </Stack.Navigator>
         </NavigationContainer>
