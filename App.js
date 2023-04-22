@@ -21,6 +21,7 @@ import { auth } from "./Firebase/firebase-setup";
 import * as Notifications from "expo-notifications";
 import { MAPS_API_KEY } from "@env";
 import Geocoder from 'react-native-geocoding';
+import { COLORS, ScreenContainer,COLORS2, addPagePressable } from "./helper";
 
 
 Geocoder.init(MAPS_API_KEY);
@@ -35,18 +36,20 @@ function BottomTabs() {
                 component={Home}
                 initialParams={{ filter: "all" }}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <Entypo name="home" size={size} color={color} />
-                    ),
+                    ),  
                 }}
             />
             <Tab.Screen
-                name="Mylist"
+                name="My list"
                 component={Home}
                 initialParams={{ filter: "user" }}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
-                        <Entypo name="list" size={24} color="black" />
+                        <Entypo name="list" size={24} color={color} />
                     ),
                 }}
             />
@@ -54,6 +57,7 @@ function BottomTabs() {
                 name="Post"
                 component={Add}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="plus" size={size} color={color} />
                     ),
@@ -63,6 +67,7 @@ function BottomTabs() {
                 name="Profile"
                 component={Profile}
                 options={{
+                    tabBarActiveTintColor: COLORS2.PRIMARY,
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome5
                             name="user-alt"
@@ -146,7 +151,16 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator 
+            screenOptions={{
+                headerStyle: {
+                  backgroundColor: COLORS2.PRIMARY,
+                },
+                headerTintColor: "#eee",
+                headerTitleStyle: {
+                  fontSize: 20,
+                },
+              }}>
                 {isAuthenticated ? AppStack : AuthStack}
             </Stack.Navigator>
         </NavigationContainer>

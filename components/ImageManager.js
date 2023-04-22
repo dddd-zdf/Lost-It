@@ -7,19 +7,20 @@ export default function ImageManager({
   imageUriHandler,
   customPressableStyle,
   imageURI,
+  camera,
 }) {
   const [imageUri, setImageUri] = useState(imageURI);
   const [permissionInfo, requestPermission] =
     ImagePicker.useCameraPermissions();
 
   async function verifyPermission() {
-    console.log(permissionInfo)
+    console.log(permissionInfo);
     if (permissionInfo.granted) {
       return true;
     }
     try {
       const permissionResult = await requestPermission();
-      console.log(permissionResult)
+      console.log(permissionResult);
       return permissionResult.granted;
     } catch (err) {
       console.log("Permission request error", err);
@@ -34,7 +35,7 @@ export default function ImageManager({
 
     try {
       const result = await ImagePicker.launchCameraAsync();
-      
+
       if (!result.canceled) {
         setImageUri(result.assets[0].uri);
         imageUriHandler(result.assets[0].uri);
@@ -45,24 +46,35 @@ export default function ImageManager({
   }
   return (
     <>
-
       <MyPressable
         pressedFunction={imageHandler}
         customStyle={customPressableStyle}
         pressedStyle={{ opacity: 0.5 }}
       >
-        {imageURI ? (
-          <Image
-            source={{ uri: imageUri }}
-            style={{
-              width: customPressableStyle.width,
-              height: customPressableStyle.height,
-            }}
-          />
-        ) : (
-          <Text style={{ color: "white" }}>Take a picture</Text>
-        )}
+        <Text style={{ color: "white" }}>{imageURI ? "Retake picture" : "Take a picture"}</Text>
       </MyPressable>
     </>
   );
+}
+
+{
+  /* <>
+<MyPressable
+  pressedFunction={imageHandler}
+  customStyle={customPressableStyle}
+  pressedStyle={{ opacity: 0.5 }}
+>
+  {imageURI ? (
+    <Image
+      source={{ uri: imageUri }}
+      style={{
+        width: customPressableStyle.width,
+        height: customPressableStyle.height,
+      }}
+    />
+  ) : (
+    <Text style={{ color: "white" }}>Take a picture</Text>
+  )}
+</MyPressable>
+</> */
 }

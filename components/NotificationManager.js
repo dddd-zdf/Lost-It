@@ -1,6 +1,8 @@
-import { View, Text, Button, Alert } from "react-native";
+import { View, Text, Button, Alert, StyleSheet } from "react-native";
 import React from "react";
 import * as Notifications from "expo-notifications";
+import MyPressable from "./MyPressable";
+import { addPagePressable, COLORS2, COLORS } from "../helper";
 
 export async function verifyPermission() {
   const permissionResponse = await Notifications.getPermissionsAsync();
@@ -28,7 +30,6 @@ export default function NotificationManager() {
         },
         // trigger: { seconds: 10 },
         trigger: { hour: 12, minute: 0, repeats: true },
-        
       });
       Alert.alert("Daily reminder set at 12pm");
     } catch (err) {
@@ -36,11 +37,24 @@ export default function NotificationManager() {
     }
   }
   return (
-    <View>
-      <Button
-        title="Get a reminder to check the app once daily?"
-        onPress={scheduleNotificationHandler}
-      />
-    </View>
+    <MyPressable
+      pressedFunction={scheduleNotificationHandler}
+      customStyle={styles.notificationPressable}
+      pressedStyle={{ opacity: 0.5 }}
+    >
+      <Text style={{color:COLORS.WHITE}}>Get a reminder to check the app once daily?</Text>
+    </MyPressable>
   );
 }
+
+const styles = StyleSheet.create({
+  notificationPressable: {
+    alignItems: "center",
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 3,
+    backgroundColor: COLORS2.PRIMARY,
+    marginBottom: 20,
+    marginTop: 20
+  },
+});
