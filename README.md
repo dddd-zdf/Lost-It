@@ -32,6 +32,14 @@
     * Added scheduled notification
     * Made map and image required field when adding a post
     * Made pictures shown on details page from the storage
+    * UI design fix
+
+#### Future Works:
+
+- Allow users to upload from gallery.
+- Improve UI on detail page
+- Reorganize the firebase data structure to use references
+
 
 #### Screenshots 3:
 
