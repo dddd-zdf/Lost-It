@@ -27,6 +27,7 @@ import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../Firebase/firebase-setup";
+import { Timestamp } from "@firebase/firestore";
 
 export default function Add({ navigation }) {
   const [title, setTitle] = useState("");
@@ -65,6 +66,7 @@ export default function Add({ navigation }) {
         uploaderEmail: user.email,
         address: address,
         date: new Date().toString(),
+        timestamp: Timestamp.fromDate(new Date()),
       };
 
       // add to db
@@ -121,9 +123,7 @@ export default function Add({ navigation }) {
 
         <View style={styles.addressContainer}>
           {address && (
-            <Text style={{ fontWeight: 500, marginBottom: 15 }}>
-              {address}
-            </Text>
+            <Text style={{ fontWeight: 500, marginBottom: 15 }}>{address}</Text>
           )}
         </View>
 

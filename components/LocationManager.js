@@ -99,10 +99,7 @@ export default function LocationManager({
       navigation.goBack();
     } else {
       try {
-        const result = await Location.getLastKnownPositionAsync();
-        if (!result) {
-          result = await Location.getCurrentPositionAsync();
-        }
+        const result = await Location.getCurrentPositionAsync();
         let myLocation = {
           latitude: Number(result.coords.latitude.toFixed(rounding)),
           longitude: Number(result.coords.longitude.toFixed(rounding)),
@@ -139,7 +136,9 @@ export default function LocationManager({
           }}
         />
       ) : (
-        <Text style={{color: COLORS.BLACK, fontWeight: 300, }}>Pick location on map</Text>
+        <Text style={{ color: COLORS.BLACK, fontWeight: 300 }}>
+          Pick location on map
+        </Text>
       )}
     </MyPressable>
   );

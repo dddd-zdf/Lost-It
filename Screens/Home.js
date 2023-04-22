@@ -18,7 +18,7 @@ export default function Home({ navigation, route }) {
 
   const q = query(
     collection(firestore, "entries"),
-    orderBy("uploader", "desc")
+    orderBy("timestamp", "desc")
   );
 
   useEffect(() => {

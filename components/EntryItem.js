@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import React from "react";
 import MyPressable from "./MyPressable";
-import { COLORS } from "../helper";
+import { COLORS, COLORS2 } from "../helper";
 
 // source={require("../assets/bg.png")}
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   titleText: {
-    color: COLORS.GOLD,
+    color: COLORS2.PRIMARY,
     fontSize: 15,
     fontWeight: "bold",
   },
