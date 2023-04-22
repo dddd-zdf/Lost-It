@@ -29,7 +29,7 @@ export default function EntryItem({ entry, onPress }) {
             <Text style={styles.text}>Uploader: </Text>
             <Text style={styles.text}>{entry.uploader}</Text>
           </View>
-          <View style={styles.labelContainer}>
+          <View style={[styles.labelContainer, {flexDirection: "column", alignItems: "center"}]}>
             <Text style={styles.text}>Time posted: </Text>
             <Text style={styles.text}>{entry.date ? entry.date : ""}</Text>
           </View>
@@ -70,8 +70,7 @@ const styles = StyleSheet.create({
   labelContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+  
     paddingHorizontal: 40,
     // marginTop: 20,
     marginBottom: 20,

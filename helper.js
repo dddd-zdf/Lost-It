@@ -22,7 +22,7 @@ export const COLORS2 = {
 
 export const ScreenContainer = {
   // flex: 1,
-  backgroundColor: COLORS.WHITE,
+  backgroundColor: "#f8f9fa",
   justifyContent: "flex-start",
   alignItems: "center",
 };

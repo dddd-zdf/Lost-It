@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Alert, Image, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, Alert, Image, ImageBackground, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { COLORS, ScreenContainer } from "../helper";
+import { COLORS, ScreenContainer,COLORS2, addPagePressable } from "../helper";
 import MyPressable from "../components/MyPressable";
 import LocationManager from "../components/LocationManager";
 import { deleteFromDB } from "../Firebase/firestore-helper";
@@ -58,10 +58,12 @@ export default function Detail({ route, navigation }) {
   }
 
   return (
-    <View style={[ScreenContainer, { paddingTop: 70 }]}>
+    <ScrollView>
+    <View style={[ScreenContainer, { paddingTop: 40 }]}>
+     
        <ImageBackground
         style={styles.poster}
-        source={require("../assets/bg.png")}
+        source={require("../assets/plainBG.png")}
       >
       <View style={styles.container}>
         <Text style={styles.text}>{`Title:  ${title}`}</Text>
@@ -96,7 +98,7 @@ export default function Detail({ route, navigation }) {
         {userId === user.uid && (
   <View style={styles.pressablesContainer}>
     <MyPressable
-      customStyle={styles.pressable}
+      customStyle={styles.pressableDelete}
       pressedStyle={{ opacity: 0.8 }}
       pressedFunction={onDeletePress}
     >
@@ -104,7 +106,7 @@ export default function Detail({ route, navigation }) {
     </MyPressable>
 
     <MyPressable
-      customStyle={styles.pressable}
+      customStyle={addPagePressable}
       pressedStyle={{ opacity: 0.8 }}
       pressedFunction={onEditPress}
     >
@@ -116,6 +118,7 @@ export default function Detail({ route, navigation }) {
       </View>
      </ImageBackground>
     </View>
+    </ScrollView>
   );
 }
 
@@ -126,15 +129,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "black",
     width: 350,
-    paddingTop: 150,
-    paddingBottom: 50,
+    paddingVertical: 50,
     paddingHorizontal: 50,
     borderRadius: 5,
-    shadowColor: COLORS.BLACK,
-    shadowRadius: 10,
-    shadowOpacity: 0.3,
-    elevation: 15,
-    shadowOffset: { width: 0, height: 0 },
+    // shadowColor: COLORS.BLACK,
+    // shadowRadius: 10,
+    // shadowOpacity: 0.3,
+    // elevation: 15,
+    // shadowOffset: { width: 0, height: 0 },
   },
   pressablesContainer: {
     flexDirection: "row",
@@ -145,13 +147,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  pressable: {
-    alignItems: "center",
-    marginHorizontal: 15,
-    padding: 12,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-    width: 80,
+  pressableDelete: {
+    ...addPagePressable,
+    backgroundColor: "red",
+    
   },
   text: {
     fontSize: 15,
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     color: COLORS.WHITE,
   },
   utilitiesContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     marginTop: 25,
     width: "90%",
     height: 200,
