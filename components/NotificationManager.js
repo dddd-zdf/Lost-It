@@ -42,7 +42,9 @@ export default function NotificationManager() {
       customStyle={styles.notificationPressable}
       pressedStyle={{ opacity: 0.5 }}
     >
-      <Text style={{color:COLORS.WHITE}}>Get a reminder to check the app once daily?</Text>
+      <Text style={{ color: COLORS.WHITE }}>
+        Get a reminder to check the app once daily?
+      </Text>
     </MyPressable>
   );
 }
@@ -55,6 +57,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: COLORS2.PRIMARY,
     marginBottom: 20,
-    marginTop: 20
+    marginTop: 20,
   },
 });

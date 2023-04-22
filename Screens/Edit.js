@@ -178,50 +178,6 @@ export default function Edit({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  // pressablesContainer: {
-  //   flexDirection: "row",
-  //   marginTop: 25,
-  //   width: 260,
-  //   height: 40,
-  //   borderColor: "black",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-  pressable: {
-    flex: 1,
-    alignItems: "center",
-    marginHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-  },
-  text: {
-    fontSize: 13,
-    color: COLORS.WHITE,
-    fontWeight: "500",
-  },
-  utilitiesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: "90%",
-    height: 200,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 10,
-  },
-  utilitiesButtons: {
-    // flex: 1,
-    width: 130,
-    height: 130,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 25,
-    paddingVertical: 7,
-    borderRadius: 3,
-    backgroundColor: COLORS.BLUE,
-    paddingHorizontal: 3,
-  },
   pressablesContainer: {
     flexDirection: "row",
     marginVertical: 25,
@@ -239,16 +195,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: COLORS.WHITE,
     fontWeight: "500",
-  },
-  utilitiesContainer: {
-    flexDirection: "row",
-    marginTop: 25,
-    width: "90%",
-    height: 200,
-    borderColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 10,
   },
   mapButton: {
     width: 0.8 * windowWidth,
