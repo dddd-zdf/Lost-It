@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginVertical: 3,
     fontWeight: "bold",
-    color: COLORS.BLUE,
+    color: COLORS.BLACK,
   },
   buttonText: {
     color: COLORS.WHITE,

@@ -43,7 +43,7 @@ function BottomTabs() {
                 }}
             />
             <Tab.Screen
-                name="Mylist"
+                name="My list"
                 component={Home}
                 initialParams={{ filter: "user" }}
                 options={{

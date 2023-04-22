@@ -14,6 +14,7 @@ export default function MyInput({
         placeholder={placeholder}
         style={[styles.input, customStyle]}
         value={value}
+        maxLength={150}
         onChangeText={(newText) => {
           textUpdateFunction(newText);
         }}

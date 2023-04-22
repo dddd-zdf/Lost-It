@@ -22,14 +22,13 @@ export default function EntryItem({ entry, onPress }) {
             <Text style={styles.titleText}>{entry.title}</Text>
           </View>
           <View style={styles.labelContainer}>
-            <Text style={styles.text}>Description: </Text>
             <Text style={styles.text}>{entry.description}</Text>
           </View>
           <View style={styles.labelContainer}>
             <Text style={styles.text}>Uploader: </Text>
             <Text style={styles.text}>{entry.uploader}</Text>
           </View>
-          <View style={[styles.labelContainer, {flexDirection: "column", alignItems: "center"}]}>
+          <View style={styles.labelContainer}>
             <Text style={styles.text}>Time posted: </Text>
             <Text style={styles.text}>{entry.date ? entry.date : ""}</Text>
           </View>
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLORS.BLACK,
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: "bold",
   },
   labelContainer: {
@@ -74,6 +73,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     // marginTop: 20,
     marginBottom: 20,
+    flexDirection: "column", 
+    alignItems: "center"
   },
   poster: {
     width: "100%",
