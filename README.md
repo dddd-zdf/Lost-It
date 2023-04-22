@@ -36,13 +36,13 @@
 #### Screenshots 3:
 
 1. Login
-<pre> <img src="./Screenshots/iteration3/login.PNG" width="180"/> </pre>
+<pre> <img src="./Screenshots/iteration3/Login.png" width="180"/> </pre>
 
 2. Signup
-<pre> <img src="./Screenshots/iteration3/signup.PNG" width="180"/> </pre>
+<pre> <img src="./Screenshots/iteration3/Signup.png" width="180"/> </pre>
 
 3. Home - home screen shows all posts/lost items from a user's community
-<pre> <img src="./Screenshots/iteration3/home.PNG" width="180"/> </pre>
+<pre> <img src="./Screenshots/iteration3/Home.png" width="180"/> </pre>
 
 4. Post
 <pre> <img src="./Screenshots/iteration3/addpost.PNG" width="180"/> <img src="./Screenshots/iteration3/mapview.PNG" width="180"/> <img src="./Screenshots/iteration3/camera.PNG" width="180"/> </pre>
