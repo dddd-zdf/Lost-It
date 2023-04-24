@@ -65,7 +65,7 @@ export default function Home({ navigation, route }) {
           }}
         >
           {filter === "user"
-            ? "You don't any lost items reported"
+            ? "You have no lost items posted"
             : "No lost items reported in your community"}
         </Text>
       )}
