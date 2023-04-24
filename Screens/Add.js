@@ -28,6 +28,7 @@ import { storage } from "../Firebase/firebase-setup";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../Firebase/firebase-setup";
 import { Timestamp } from "@firebase/firestore";
+import * as ImagePicker from "expo-image-picker";
 
 export default function Add({ navigation }) {
   const [title, setTitle] = useState("");
@@ -51,6 +52,45 @@ export default function Add({ navigation }) {
     setImageUri("");
     setAddress(null);
   }
+
+  
+
+async function verifyPermission() {
+  let permissionInfo = await ImagePicker.getMediaLibraryPermissionsAsync();
+  if (permissionInfo.granted) {
+    return true;
+  }
+  try {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();;
+    return permissionResult.granted;
+  } catch (err) {
+    console.log("Permission request error", err);
+  }
+}
+
+
+
+
+
+  const uploadImage = async () => {
+    const hasPermission = await verifyPermission();
+    if (!hasPermission) {
+      Alert.alert("You need to give access to the photo library");
+      return;
+    }
+
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync();
+
+      if (!result.canceled) {
+        setImageUri(result.assets[0].uri);
+      }
+    } catch (err) {
+      console.log("launch photo library failedd", err);
+    }
+
+
+  };
 
   async function onSubmit(title, description) {
     if (checkNotEmpty(title, description)) {
@@ -143,13 +183,14 @@ export default function Add({ navigation }) {
           customPressableStyle={styles.imageButtons}
           imageURI={imageUri}
         ></ImageManager>
-        {/* <MyPressable
-            pressedFunction={() => onSubmit(title, description)}
-            customStyle={styles.pressable}
-            pressedStyle={{ opacity: 0.5 }}
-          >
-            <Text style={styles.text}>Submit</Text>
-          </MyPressable> */}
+
+        <MyPressable
+          pressedFunction={() => uploadImage()}
+          customStyle={styles.imageButtons}
+          pressedStyle={{ opacity: 0.8 }}
+        >
+          <Text style={styles.text}>Upload a picture</Text>
+        </MyPressable>
 
         <View style={styles.pressablesContainer}>
           <MyPressable
@@ -219,7 +260,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: COLORS2.PRIMARY,
     paddingHorizontal: 3,
-    // marginTop: 25,
+    marginTop: 5,
   },
   imageContainer: {
     width: 0.8 * windowWidth,
