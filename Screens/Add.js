@@ -53,24 +53,19 @@ export default function Add({ navigation }) {
     setAddress(null);
   }
 
-  
-
-async function verifyPermission() {
-  let permissionInfo = await ImagePicker.getMediaLibraryPermissionsAsync();
-  if (permissionInfo.granted) {
-    return true;
+  async function verifyPermission() {
+    let permissionInfo = await ImagePicker.getMediaLibraryPermissionsAsync();
+    if (permissionInfo.granted) {
+      return true;
+    }
+    try {
+      const permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      return permissionResult.granted;
+    } catch (err) {
+      console.log("Permission request error", err);
+    }
   }
-  try {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();;
-    return permissionResult.granted;
-  } catch (err) {
-    console.log("Permission request error", err);
-  }
-}
-
-
-
-
 
   const uploadImage = async () => {
     const hasPermission = await verifyPermission();
@@ -88,8 +83,6 @@ async function verifyPermission() {
     } catch (err) {
       console.log("launch photo library failedd", err);
     }
-
-
   };
 
   async function onSubmit(title, description) {

@@ -23,6 +23,7 @@ import LocationManager from "../components/LocationManager";
 import ImageManager from "../components/ImageManager";
 import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../Firebase/firebase-setup";
+import * as ImagePicker from "expo-image-picker";
 
 export default function Edit({ route, navigation }) {
   const { title, description, location, imageURL, address } = route.params;
@@ -46,6 +47,37 @@ export default function Edit({ route, navigation }) {
   function cancel() {
     return navigation.goBack();
   }
+
+  async function verifyPermission() {
+    let permissionInfo = await ImagePicker.getMediaLibraryPermissionsAsync();
+    if (permissionInfo.granted) {
+      return true;
+    }
+    try {
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();;
+      return permissionResult.granted;
+    } catch (err) {
+      console.log("Permission request error", err);
+    }
+  }
+
+  const uploadImage = async () => {
+    const hasPermission = await verifyPermission();
+    if (!hasPermission) {
+      Alert.alert("You need to give access to the photo library");
+      return;
+    }
+
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({mediaTypes: ImagePicker.MediaTypeOptions.All});
+
+      if (!result.canceled) {
+        setImageUri(result.assets[0].uri);
+      }
+    } catch (err) {
+      console.log("launch photo library failedd", err);
+    }
+  };
 
   async function fetchImage(uri) {
     try {
@@ -147,6 +179,14 @@ export default function Edit({ route, navigation }) {
           imageURI={imageUri}
         ></ImageManager>
 
+<MyPressable
+          pressedFunction={() => uploadImage()}
+          customStyle={styles.imageButtons}
+          pressedStyle={{ opacity: 0.8 }}
+        >
+          <Text style={styles.text}>Reupload a picture</Text>
+        </MyPressable>
+
         <View style={styles.pressablesContainer}>
           <MyPressable
             pressedFunction={() => cancel()}
@@ -214,7 +254,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: COLORS2.PRIMARY,
     paddingHorizontal: 3,
-    // marginTop: 25,
+    marginTop: 5,
   },
   imageContainer: {
     width: 0.8 * windowWidth,
