@@ -14,13 +14,11 @@ export default function ImageManager({
     ImagePicker.useCameraPermissions();
 
   async function verifyPermission() {
-    console.log(permissionInfo);
     if (permissionInfo.granted) {
       return true;
     }
     try {
       const permissionResult = await requestPermission();
-      console.log(permissionResult);
       return permissionResult.granted;
     } catch (err) {
       console.log("Permission request error", err);
