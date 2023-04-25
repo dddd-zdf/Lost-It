@@ -2,6 +2,9 @@
 
 [Demo Link](https://www.youtube.com/watch?v=FjIGmhQjwZk)
 
+[Presentation Slides](https://docs.google.com/presentation/d/1LfT8pe0cm1Q1W2vUxgafsS2xrhkpP4vJFj-IeOLbfDI/edit?usp=sharing)
+
+
 - [Iteration 3](#iteration-3) 
     - [Contribution](#contribution-3) 
     - [Screenshots](#screenshots-3)
